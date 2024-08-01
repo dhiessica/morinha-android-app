@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">morinha</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Esqueci minha senha</string>
+    <string name="sign_in">Entrar</string>
+    <string name="register">Register</string>
+
+
+
+    <string name="content_arrow_right_icon">Ícone de seta para a direita para prosseguir</string>
+</resources>
