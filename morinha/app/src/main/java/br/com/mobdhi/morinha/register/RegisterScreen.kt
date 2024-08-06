@@ -1,4 +1,4 @@
-package br.com.mobdhi.morinha.login
+package br.com.mobdhi.morinha.register
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -23,34 +23,40 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import br.com.mobdhi.morinha.R
+import br.com.mobdhi.morinha.components.ConfirmPasswordTextField
 import br.com.mobdhi.morinha.components.DefaultButton
-import br.com.mobdhi.morinha.components.DefaultTextField
 import br.com.mobdhi.morinha.components.DefaultOutlinedButton
+import br.com.mobdhi.morinha.components.DefaultTextField
 import br.com.mobdhi.morinha.components.PasswordTextField
 import br.com.mobdhi.morinha.ui.theme.MorinhaTheme
 
 @Composable
-fun LoginScreen() {
+fun RegisterScreen() {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var confirmPassword by remember { mutableStateOf("") }
 
-    LoginContent(
+    RegisterContent(
         email = email,
         password = password,
+        confirmPassword = confirmPassword,
         onEmailValueChanged = { email = it },
         onPasswordValueChanged = { password = it },
-        onForgotPasswordClicked = {}, //TODO
-        onEnterClicked = {},
+        onConfirmPasswordValueChanged = { confirmPassword = it },
+        onForgotPasswordClicked = { /*TODO*/ },
+        onEnterClicked = { /*TODO*/ },
         onRegisterClicked = {}
     )
 }
 
 @Composable
-fun LoginContent(
+fun RegisterContent(
     email: String,
     password: String,
+    confirmPassword: String,
     onEmailValueChanged: (String) -> Unit,
     onPasswordValueChanged: (String) -> Unit,
+    onConfirmPasswordValueChanged: (String) -> Unit,
     onForgotPasswordClicked: () -> Unit,
     onEnterClicked: () -> Unit,
     onRegisterClicked: () -> Unit
@@ -65,7 +71,7 @@ fun LoginContent(
             verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium)),
         ) {
             Text(
-                text = stringResource(R.string.log_in_title),
+                text = stringResource(R.string.register_title),
                 style = MaterialTheme.typography.displaySmall,
                 fontWeight = FontWeight.Bold
             )
@@ -79,31 +85,20 @@ fun LoginContent(
                 password = password,
                 onPasswordChange = onPasswordValueChanged
             )
-            Box(modifier = Modifier.fillMaxWidth()) {
-                Text(
-                    text = stringResource(R.string.forgot_password),
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier
-                        .align(Alignment.CenterEnd)
-                        .clickable(
-                            onClick = onForgotPasswordClicked
-                        )
-                )
-            }
+            ConfirmPasswordTextField(
+                password = password,
+                confirmPassword = confirmPassword,
+                onConfirmPasswordChange = onConfirmPasswordValueChanged
+            )
         }
         Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_divisor)))
         Column(
             verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium))
         ) {
             DefaultButton(
-                text = stringResource(R.string.log_in),
+                text = stringResource(R.string.continue_button),
                 enabled = true,
                 onClick = onEnterClicked
-            )
-            DefaultOutlinedButton(
-                text = stringResource(R.string.register),
-                enabled = true,
-                onClick = onRegisterClicked
             )
         }
     }
@@ -111,8 +106,8 @@ fun LoginContent(
 
 @Preview(showBackground = true)
 @Composable
-fun LoginPreview() {
+fun RegisterPreview() {
     MorinhaTheme {
-        LoginScreen()
+        RegisterScreen()
     }
 }

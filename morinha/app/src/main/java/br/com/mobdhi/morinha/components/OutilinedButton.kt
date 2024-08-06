@@ -16,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -23,7 +24,7 @@ import br.com.mobdhi.morinha.R
 import br.com.mobdhi.morinha.ui.theme.MorinhaTheme
 
 @Composable
-fun OutlinedButton2(
+fun DefaultOutlinedButton(
     text: String,
     enabled: Boolean,
     onClick: () -> Unit,
@@ -46,19 +47,19 @@ fun OutlinedButton2(
             Text(
                 text = text,
                 modifier = Modifier
-                    .padding(8.dp)
+                    .padding(dimensionResource(R.dimen.padding_small))
                     .weight(1F)
             )
             Icon(
                 imageVector = Icons.Filled.KeyboardArrowRight,
                 contentDescription = stringResource(R.string.content_arrow_right_icon),
-                modifier = Modifier.size(24.dp)
+                modifier = Modifier.size(dimensionResource(R.dimen.padding_large))
             )
         }
         else
             Text(
                 text = text,
-                modifier = Modifier.padding(8.dp)
+                modifier = Modifier.padding(dimensionResource(R.dimen.padding_small))
             )
     }
 }
@@ -69,9 +70,9 @@ fun OutlinedButtonPreview() {
     MorinhaTheme {
         Column(modifier = Modifier
             .fillMaxSize()
-            .padding(24.dp)
+            .padding(dimensionResource(R.dimen.padding_large))
         ) {
-            OutlinedButton2(
+            DefaultOutlinedButton(
                 text = "teste",
                 enabled = true,
                 onClick = {},

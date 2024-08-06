@@ -1,10 +1,15 @@
 <resources>
     <string name="app_name">morinha</string>
     <string name="email">Email</string>
-    <string name="password">Password</string>
+    <string name="password">Senha</string>
+    <string name="confirm_password">Confirmar senha</string>
     <string name="forgot_password">Esqueci minha senha</string>
-    <string name="sign_in">Entrar</string>
-    <string name="register">Register</string>
+    <string name="log_in">Entrar</string>
+    <string name="log_in_title">Entrada</string>
+    <string name="register">Registrar</string>
+    <string name="continue_button">Continuar</string>
+    <string name="register_title">Registro</string>
+    <string name="error_password_no_match">As senhas estão diferentes</string>
 
 
 

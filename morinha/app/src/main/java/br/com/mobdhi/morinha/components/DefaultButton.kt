@@ -9,8 +9,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import br.com.mobdhi.morinha.R
 import br.com.mobdhi.morinha.ui.theme.MorinhaTheme
 
 @Composable
@@ -28,7 +30,7 @@ fun DefaultButton(
         Text(
             text = text,
             modifier = Modifier
-                .padding(8.dp)
+                .padding(dimensionResource(R.dimen.padding_small))
         )
     }
 }
@@ -39,7 +41,7 @@ fun DefaultButtonPreview() {
     MorinhaTheme {
         Column(modifier = Modifier
             .fillMaxSize()
-            .padding(24.dp)
+            .padding(dimensionResource(R.dimen.padding_large))
         ) {
             DefaultButton(
                 text = "teste",
