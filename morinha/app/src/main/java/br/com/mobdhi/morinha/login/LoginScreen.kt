@@ -30,7 +30,11 @@ import br.com.mobdhi.morinha.components.PasswordTextField
 import br.com.mobdhi.morinha.ui.theme.MorinhaTheme
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(
+    navigateToHomeScreen: () -> Unit,
+    navigateToForgotPasswordScreen: () -> Unit,
+    navigateToRegisterScreen: () -> Unit
+) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
@@ -39,9 +43,9 @@ fun LoginScreen() {
         password = password,
         onEmailValueChanged = { email = it },
         onPasswordValueChanged = { password = it },
-        onForgotPasswordClicked = {}, //TODO
-        onEnterClicked = {},
-        onRegisterClicked = {}
+        onEnterClicked = navigateToHomeScreen,
+        onForgotPasswordClicked = navigateToForgotPasswordScreen,
+        onRegisterClicked = navigateToRegisterScreen
     )
 }
 
@@ -113,6 +117,10 @@ fun LoginContent(
 @Composable
 fun LoginPreview() {
     MorinhaTheme {
-        LoginScreen()
+        LoginScreen(
+            navigateToHomeScreen = {},
+            navigateToForgotPasswordScreen = {},
+            navigateToRegisterScreen = {}
+        )
     }
 }
