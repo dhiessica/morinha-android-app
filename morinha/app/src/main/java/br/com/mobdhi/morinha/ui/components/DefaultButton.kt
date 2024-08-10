@@ -1,4 +1,4 @@
-package br.com.mobdhi.morinha.components
+package br.com.mobdhi.morinha.ui.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize

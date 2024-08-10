@@ -1,4 +1,4 @@
-package br.com.mobdhi.morinha.components
+package br.com.mobdhi.morinha.ui.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,7 +19,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.mobdhi.morinha.R
-import br.com.mobdhi.morinha.login.LoginScreen
+import br.com.mobdhi.morinha.auth.login.LoginScreen
 import br.com.mobdhi.morinha.ui.theme.MorinhaTheme
 
 @Composable

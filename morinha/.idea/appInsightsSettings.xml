@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="br.com.mobdhi.morinha" />
+                  <option name="mobileSdkAppId" value="1:474782435227:android:9ccca1c40dac7e02bd433e" />
+                  <option name="projectId" value="mobdhi-morinha" />
+                  <option name="projectNumber" value="474782435227" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

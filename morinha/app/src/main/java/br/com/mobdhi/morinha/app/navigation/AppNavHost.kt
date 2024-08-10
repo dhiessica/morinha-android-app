@@ -1,25 +1,38 @@
-package br.com.mobdhi.morinha.navigation
+package br.com.mobdhi.morinha.app.navigation
 
+import android.widget.Toast
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
+import br.com.mobdhi.morinha.auth.domain.AuthRepository
 import br.com.mobdhi.morinha.home.HomeScreen
-import br.com.mobdhi.morinha.login.LoginScreen
-import br.com.mobdhi.morinha.register.RegisterScreen
+import br.com.mobdhi.morinha.auth.login.LoginScreen
+import br.com.mobdhi.morinha.auth.register.RegisterScreen
+import org.koin.java.KoinJavaComponent.get
 
 @Composable
-fun AppNavHost(navHostController: NavHostController) {
+fun AppNavHost(
+    navHostController: NavHostController
+) {
+
     NavHost(
         navController = navHostController,
-        startDestination = RootScreen.AuthRoot.route
+        startDestination = getStartDestination()
     ) {
         addAuthRoute(navHostController)
         addHomeRoute()
     }
+}
+
+private fun getStartDestination(): String {
+    val authRepository: AuthRepository = get(AuthRepository::class.java)
+    return if (authRepository.hasUser) RootScreen.HomeRoot.route
+    else RootScreen.AuthRoot.route
 }
 
 private fun NavGraphBuilder.addAuthRoute(
@@ -30,7 +43,7 @@ private fun NavGraphBuilder.addAuthRoute(
         startDestination = LeafScreens.Login.route
     ) {
         showLogin(navController)
-        showRegister()
+        showRegister(navController)
     }
 }
 
@@ -40,6 +53,8 @@ private fun NavGraphBuilder.showLogin(
     composable(
         route = LeafScreens.Login.route
     ) {
+        val context = LocalContext.current
+
         LoginScreen(
             navigateToHomeScreen = {
                 navController.navigate(RootScreen.HomeRoot.route) {
@@ -48,17 +63,30 @@ private fun NavGraphBuilder.showLogin(
                     }
                 }
             },
-            navigateToForgotPasswordScreen = {/*TODO*/ },
+            navigateToForgotPasswordScreen = {
+                Toast.makeText(context, "Funcionalidade ainda não implementada", Toast.LENGTH_LONG).show()
+
+            },
             navigateToRegisterScreen = { navController.navigate(LeafScreens.Register.route) },
         )
     }
 }
 
-private fun NavGraphBuilder.showRegister() {
+private fun NavGraphBuilder.showRegister(
+    navController: NavController
+) {
     composable(
         route = LeafScreens.Register.route
     ) {
-        RegisterScreen()
+        RegisterScreen(
+            navigateToHomeScreen = {
+                navController.navigate(RootScreen.HomeRoot.route) {
+                    popUpTo(RootScreen.AuthRoot.route) {
+                        inclusive = true
+                    }
+                }
+            }
+        )
     }
 }
 

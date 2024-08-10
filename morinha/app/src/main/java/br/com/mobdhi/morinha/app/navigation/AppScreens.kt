@@ -1,4 +1,4 @@
-package br.com.mobdhi.morinha.navigation
+package br.com.mobdhi.morinha.app.navigation
 
 sealed class RootScreen(val route: String) {
     object HomeRoot : RootScreen(route = "home_root")

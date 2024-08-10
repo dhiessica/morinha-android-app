@@ -1,4 +1,4 @@
-package br.com.mobdhi.morinha.components
+package br.com.mobdhi.morinha.ui.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column

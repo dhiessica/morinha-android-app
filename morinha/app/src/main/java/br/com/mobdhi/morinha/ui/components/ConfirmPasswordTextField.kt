@@ -1,4 +1,4 @@
-package br.com.mobdhi.morinha.components
+package br.com.mobdhi.morinha.ui.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -39,9 +39,9 @@ import br.com.mobdhi.morinha.ui.theme.MorinhaTheme
 fun ConfirmPasswordTextField(
     password: String,
     confirmPassword: String,
+    label: String = stringResource(R.string.confirm_password),
     onConfirmPasswordChange: (String) -> Unit,
-    hasError: Boolean = false,
-    label: String = stringResource(R.string.confirm_password)
+    hasError: Boolean = false
 ) {
     var isPasswordVisible by remember { mutableStateOf(false) }
     val matchError = remember { mutableStateOf(false) }
