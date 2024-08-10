@@ -1,5 +1,5 @@
 # Morinha App
-App para registro de vacinas de cães e gatos. Para utilizar o app o usuário deve efetuar o registro d euma conta ou login, e adicionar as informações do pet para começar a registrar a data, dosagem e tipo de vacina.
+App para registro de vacinas de cães e gatos. Para utilizar o app o usuário deve efetuar o registro de uma conta ou login e adicionar as informações do pet para começar a registrar a data, dosagem e tipo de vacina.
 
 ## Features previstas 
 ### Tutor
