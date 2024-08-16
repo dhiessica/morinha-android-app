@@ -3,7 +3,7 @@ package br.com.mobdhi.morinha.auth.register
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.mobdhi.morinha.domain.model.Response
-import br.com.mobdhi.morinha.auth.domain.AuthRepository
+import br.com.mobdhi.morinha.domain.repository.AuthRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
@@ -29,26 +29,31 @@ class RegisterViewModel(
 
     fun registerUser(email: String, password: String) = viewModelScope.launch {
         authRepository.register(email, password).collectLatest { result ->
-            when(result) {
+            when (result) {
                 is Response.Loading -> {
                     uiState.update { it.copy(isLoading = true) }
                 }
+
                 is Response.Success -> {
-                    uiState.update { it.copy(
-                        isSuccess = true,
-                        isLoading = false,
-                        isError = ""
-                    ) }
+                    uiState.update {
+                        it.copy(
+                            isSuccess = true,
+                            isLoading = false,
+                            isError = ""
+                        )
+                    }
                 }
+
                 is Response.Error -> {
-                    uiState.update { it.copy(
-                        isError = result.message ?: "Error with no message",
-                        isSuccess = false,
-                        isLoading = false,
-                    ) }
+                    uiState.update {
+                        it.copy(
+                            isError = result.message ?: "Error with no message",
+                            isSuccess = false,
+                            isLoading = false,
+                        )
+                    }
                 }
             }
         }
     }
-
 }

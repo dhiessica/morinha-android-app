@@ -1,6 +1,6 @@
-package br.com.mobdhi.morinha.auth.domain
+package br.com.mobdhi.morinha.domain.repository
 
-import br.com.mobdhi.morinha.auth.domain.User
+import br.com.mobdhi.morinha.domain.model.User
 import br.com.mobdhi.morinha.domain.model.Response
 import com.google.firebase.auth.AuthResult
 import kotlinx.coroutines.flow.Flow

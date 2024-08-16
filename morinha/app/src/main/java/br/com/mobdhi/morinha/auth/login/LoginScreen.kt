@@ -85,7 +85,8 @@ fun LoginContent(
     }
     else if (uiState.isSuccess) {
         onLoginWithSuccess.invoke()
-    } else {
+    }
+    else {
         if (uiState.isError.isNotEmpty()) {
             Toast.makeText(
                 LocalContext.current,

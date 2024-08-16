@@ -83,7 +83,8 @@ fun RegisterContent(
     }
     else if (uiState.isSuccess) {
         onRegisterWithSuccess.invoke()
-    } else {
+    }
+    else {
         if (uiState.isError.isNotEmpty()) {
             Toast.makeText(LocalContext.current, "Não foi possível efetuar o cadastro", Toast.LENGTH_LONG).show()
             Log.e("Register", uiState.isError)
@@ -131,7 +132,6 @@ fun RegisterContent(
             }
         }
     }
-
 }
 
 @Preview(showBackground = true)

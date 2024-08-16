@@ -9,7 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
-import br.com.mobdhi.morinha.auth.domain.AuthRepository
+import br.com.mobdhi.morinha.domain.repository.AuthRepository
 import br.com.mobdhi.morinha.home.HomeScreen
 import br.com.mobdhi.morinha.auth.login.LoginScreen
 import br.com.mobdhi.morinha.auth.register.RegisterScreen

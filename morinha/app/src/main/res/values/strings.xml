@@ -11,6 +11,7 @@
     <string name="register_title">Registro</string>
     <string name="error_password_no_match">As senhas estão diferentes</string>
     <string name="error_password_length_min">A senha precisa ter no mmínimo 6 caracteres</string>
+    <string name="pets_title">Meus pets</string>
 
 
 
