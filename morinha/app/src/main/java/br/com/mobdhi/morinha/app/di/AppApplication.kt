@@ -12,7 +12,7 @@ class AppApplication : Application() {
         startKoin {
             AndroidLogger()
             androidContext(this@AppApplication)
-            modules(remedyClockAppKoinModule())
+            modules(morinhaAppKoinModule())
         }
     }
 }

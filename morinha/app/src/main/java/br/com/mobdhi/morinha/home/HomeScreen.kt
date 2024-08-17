@@ -23,11 +23,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.mobdhi.morinha.R
-import br.com.mobdhi.morinha.domain.model.Pet
 import br.com.mobdhi.morinha.ui.components.PetCard
 import br.com.mobdhi.morinha.ui.theme.MorinhaTheme
 import org.koin.androidx.compose.getViewModel
-import java.time.LocalDate
 
 @Composable
 fun HomeScreen(
@@ -97,7 +95,8 @@ fun HomeContent(
                 }
             }
             is HomeUiState.Error -> {
-
+                Text(text = " errooo, ${uiState.message}")
+                println("erro ${uiState.message}")
             }
         }
     }

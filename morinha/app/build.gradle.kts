@@ -67,6 +67,7 @@ dependencies {
     implementation(libs.androidx.navigation)
     implementation(libs.google.firebase.analytics)
     implementation(libs.google.firebase.auth)
+    implementation(libs.google.firebase.firestore)
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.navigation)
     implementation(libs.koin.androidx.compose)

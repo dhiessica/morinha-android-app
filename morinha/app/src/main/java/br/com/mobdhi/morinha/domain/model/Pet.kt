@@ -7,8 +7,9 @@ data class Pet(
     val name: String = "",
     val specie: String = "",
     val breed: String = "",
-    val bornDate: LocalDate = LocalDate.now(),
+    val bornDate: String = "",
     val genre: String = "",
     val weight: Double = 0.0,
-    val color: String = ""
+    val color: String = "",
+    val tutorId: String = ""
 )

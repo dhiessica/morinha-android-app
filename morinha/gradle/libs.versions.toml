@@ -35,6 +35,7 @@ androidx-material = { group = "androidx.compose.material", name = "material-icon
 androidx-animation = { group = "androidx.compose.animation", name = "animation" }
 google-firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
 google-firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
+google-firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore" }
 google-firebase-auth = { group = "com.google.firebase", name = "firebase-auth" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
 koin-androidx-navigation = { group = "io.insert-koin", name = "koin-androidx-navigation", version.ref = "koin" }
