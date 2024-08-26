@@ -3,23 +3,18 @@ package br.com.mobdhi.morinha.home.pets
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.mobdhi.morinha.domain.model.Response
-import br.com.mobdhi.morinha.domain.repository.HomeRepository
-import br.com.mobdhi.morinha.home.pets.PetsUiState
+import br.com.mobdhi.morinha.domain.repository.PetRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class PetsViewModel(
-    private val homeRepository: HomeRepository
+    private val homeRepository: PetRepository
 ) : ViewModel() {
 
     var uiState = MutableStateFlow<PetsUiState>(PetsUiState.Loading())
         private set
-
-    init {
-        getPets()
-    }
 
     fun getPets() = viewModelScope.launch {
         homeRepository.getPets().collectLatest { result ->

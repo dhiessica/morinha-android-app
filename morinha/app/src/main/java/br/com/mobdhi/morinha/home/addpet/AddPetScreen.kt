@@ -28,7 +28,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -89,6 +88,7 @@ fun AddPetContent(
             is AddPetUiState.Initial -> {
                 AddPetForm(
                     pet = uiState.pet.value,
+                    isEntryValid = uiState.isEntryValid.value,
                     specieOptions = getDefaultSpecies(),
                     genreOptions = getDefaultGenres(),
                     updateUiState = updateUiState,
@@ -115,9 +115,9 @@ fun AddPetForm(
     specieOptions: List<Specie>,
     genreOptions: List<Genre>,
     updateUiState: (Pet) -> Unit,
-    onAddPetButtonClicked: () -> Unit
+    onAddPetButtonClicked: () -> Unit,
+    isEntryValid: Boolean
 ) {
-    //TODO: campos nao estao alterando o valor quando digita no campo
     var showDatePicker by remember { mutableStateOf(false) }
     val datePickerState = rememberDatePickerState(initialDisplayMode = DisplayMode.Input)
 
@@ -231,7 +231,7 @@ fun AddPetForm(
     ) {
         DefaultButton(
             text = stringResource(R.string.add_button),
-            enabled = true,
+            enabled = isEntryValid,
             onClick = { onAddPetButtonClicked() }
         )
     }

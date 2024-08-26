@@ -2,13 +2,17 @@ package br.com.mobdhi.morinha.home.data
 
 import br.com.mobdhi.morinha.domain.model.Pet
 import br.com.mobdhi.morinha.domain.model.Response
-import br.com.mobdhi.morinha.domain.repository.HomeRepository
+import br.com.mobdhi.morinha.domain.repository.PetRepository
 import kotlinx.coroutines.flow.Flow
 
 class PetRepositoryImpl(
     private val remoteDataSourceImpl: PetRemoteDataSourceImpl
-) : HomeRepository {
+) : PetRepository {
     override fun getPets(): Flow<Response<List<Pet>>> {
         return remoteDataSourceImpl.getPets() //Todo: adicionar regras pra banco de dados local
+    }
+
+    override fun addPet(pet: Pet): Flow<Response<String>> {
+        return remoteDataSourceImpl.addPets(pet)
     }
 }

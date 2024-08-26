@@ -121,7 +121,7 @@ private fun NavGraphBuilder.showAddPet(
         route = LeafScreens.AddPet.route
     ) {
         AddPetScreen(
-            navigateBack = { navController.popBackStack() }
+            navigateBack = { navController.navigateUp() }
         )
     }
 }

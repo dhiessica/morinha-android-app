@@ -4,7 +4,7 @@ import br.com.mobdhi.morinha.domain.repository.AuthRepository
 import br.com.mobdhi.morinha.auth.AuthRepositoryImpl
 import br.com.mobdhi.morinha.auth.login.LoginViewModel
 import br.com.mobdhi.morinha.auth.register.RegisterViewModel
-import br.com.mobdhi.morinha.domain.repository.HomeRepository
+import br.com.mobdhi.morinha.domain.repository.PetRepository
 import br.com.mobdhi.morinha.home.addpet.AddPetViewModel
 import br.com.mobdhi.morinha.home.data.PetRepositoryImpl
 import br.com.mobdhi.morinha.home.pets.PetsViewModel
@@ -21,10 +21,10 @@ fun morinhaAppKoinModule() = module {
     single { PetRemoteDataSourceImpl(get(), get()) }
 
     single<AuthRepository> { AuthRepositoryImpl(get()) }
-    single<HomeRepository> { PetRepositoryImpl(get()) }
+    single<PetRepository> { PetRepositoryImpl(get()) }
 
     viewModel { LoginViewModel(get()) }
     viewModel { RegisterViewModel(get()) }
     viewModel { PetsViewModel(get()) }
-    viewModel { AddPetViewModel() }
+    viewModel { AddPetViewModel(get()) }
 }

@@ -1,7 +1,6 @@
 package br.com.mobdhi.morinha.domain.model
 
-data class Pet(
-    val id: String = "",
+data class PetDTO(
     val name: String = "",
     val specie: Specie = Specie(),
     val breed: String = "",
@@ -10,15 +9,4 @@ data class Pet(
     val weight: String = "0.0",
     val color: String = "",
     val tutorId: String = ""
-)
-
-fun Pet.toPetDTO(): PetDTO = PetDTO(
-    name,
-    specie,
-    breed,
-    bornDate,
-    genre,
-    weight,
-    color,
-    tutorId
 )

@@ -4,6 +4,7 @@ import br.com.mobdhi.morinha.domain.model.Pet
 import br.com.mobdhi.morinha.domain.model.Response
 import kotlinx.coroutines.flow.Flow
 
-interface HomeRepository {
+interface PetRepository {
     fun getPets(): Flow<Response<List<Pet>>>
+    fun addPet(pet: Pet): Flow<Response<String>>
 }
