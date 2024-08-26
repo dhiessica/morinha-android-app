@@ -1,11 +1,10 @@
-package br.com.mobdhi.morinha.home
+package br.com.mobdhi.morinha.home.data
 
 import br.com.mobdhi.morinha.domain.datasource.PetDataSource
-import br.com.mobdhi.morinha.domain.datasource.RemoteDataBasePaths.PETS
+import br.com.mobdhi.morinha.domain.RemoteDataBasePaths.PETS
 import br.com.mobdhi.morinha.domain.model.Pet
 import br.com.mobdhi.morinha.domain.model.Response
 import br.com.mobdhi.morinha.domain.repository.AuthRepository
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch

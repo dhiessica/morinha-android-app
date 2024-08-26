@@ -1,4 +1,4 @@
-package br.com.mobdhi.morinha.domain.datasource
+package br.com.mobdhi.morinha.domain
 
 object RemoteDataBasePaths {
     const val USERS = "users"

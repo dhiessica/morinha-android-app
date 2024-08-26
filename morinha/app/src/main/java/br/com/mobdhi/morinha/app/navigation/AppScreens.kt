@@ -8,4 +8,5 @@ sealed class LeafScreens(val route: String) {
     object Home : LeafScreens(route = "home")
     object Login : LeafScreens(route = "login")
     object Register : LeafScreens(route = "register")
+    object AddPet : LeafScreens(route = "add_pet")
 }

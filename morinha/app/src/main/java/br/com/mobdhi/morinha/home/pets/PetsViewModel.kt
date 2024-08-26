@@ -1,21 +1,20 @@
-package br.com.mobdhi.morinha.home
+package br.com.mobdhi.morinha.home.pets
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.mobdhi.morinha.domain.model.Pet
 import br.com.mobdhi.morinha.domain.model.Response
 import br.com.mobdhi.morinha.domain.repository.HomeRepository
+import br.com.mobdhi.morinha.home.pets.PetsUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.time.LocalDate
 
-class HomeViewModel(
+class PetsViewModel(
     private val homeRepository: HomeRepository
 ) : ViewModel() {
 
-    var uiState = MutableStateFlow<HomeUiState>(HomeUiState.Loading())
+    var uiState = MutableStateFlow<PetsUiState>(PetsUiState.Loading())
         private set
 
     init {
@@ -26,15 +25,15 @@ class HomeViewModel(
         homeRepository.getPets().collectLatest { result ->
             when (result) {
                 is Response.Loading -> {
-                    uiState.update { HomeUiState.Loading() }
+                    uiState.update { PetsUiState.Loading() }
                 }
 
                 is Response.Success -> {
-                    uiState.update { HomeUiState.Success(result.data) }
+                    uiState.update { PetsUiState.Success(result.data) }
                 }
 
                 is Response.Error -> {
-                    uiState.update { HomeUiState.Error(result.message ?: "Error with no message") }
+                    uiState.update { PetsUiState.Error(result.message ?: "Error with no message") }
                 }
             }
         }

@@ -10,22 +10,22 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import br.com.mobdhi.morinha.domain.repository.AuthRepository
-import br.com.mobdhi.morinha.home.HomeScreen
+import br.com.mobdhi.morinha.home.pets.HomeScreen
 import br.com.mobdhi.morinha.auth.login.LoginScreen
 import br.com.mobdhi.morinha.auth.register.RegisterScreen
+import br.com.mobdhi.morinha.home.addpet.AddPetScreen
 import org.koin.java.KoinJavaComponent.get
 
 @Composable
 fun AppNavHost(
     navHostController: NavHostController
 ) {
-
     NavHost(
         navController = navHostController,
         startDestination = getStartDestination()
     ) {
         addAuthRoute(navHostController)
-        addHomeRoute()
+        addHomeRoute(navHostController)
     }
 }
 
@@ -90,20 +90,39 @@ private fun NavGraphBuilder.showRegister(
     }
 }
 
-private fun NavGraphBuilder.addHomeRoute() {
+private fun NavGraphBuilder.addHomeRoute(
+    navController: NavController
+) {
     navigation(
         route = RootScreen.HomeRoot.route,
         startDestination = LeafScreens.Home.route
     ) {
-        showHome()
+        showHome(navController)
+        showAddPet(navController)
     }
 }
 
-private fun NavGraphBuilder.showHome() {
+private fun NavGraphBuilder.showHome(
+    navController: NavController
+) {
     composable(
         route = LeafScreens.Home.route
     ) {
-        HomeScreen()
+        HomeScreen(
+            navigateToAddPetScreen = { navController.navigate(LeafScreens.AddPet.route) }
+        )
+    }
+}
+
+private fun NavGraphBuilder.showAddPet(
+    navController: NavController
+) {
+    composable(
+        route = LeafScreens.AddPet.route
+    ) {
+        AddPetScreen(
+            navigateBack = { navController.popBackStack() }
+        )
     }
 }
 

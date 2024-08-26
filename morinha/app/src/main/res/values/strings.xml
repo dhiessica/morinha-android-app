@@ -8,12 +8,29 @@
     <string name="log_in_title">Entrada</string>
     <string name="register">Registrar</string>
     <string name="continue_button">Continuar</string>
+    <string name="add_button">Adicionar</string>
     <string name="register_title">Registro</string>
     <string name="error_password_no_match">As senhas estão diferentes</string>
     <string name="error_password_length_min">A senha precisa ter no mmínimo 6 caracteres</string>
     <string name="pets_title">Meus pets</string>
-
+    <string name="add_pet_title">Adicionar novo pet</string>
+    <string name="pet_name">Nome do pet</string>
+    <string name="pet_specie">Espécie</string>
+    <string name="pet_dog">Cão</string>
+    <string name="pet_cat">Gato</string>
+    <string name="pet_female">Fêmea</string>
+    <string name="pet_male">Macho</string>
+    <string name="pet_breed">Raça</string>
+    <string name="pet_born_date">Data de nascimento</string>
+    <string name="pet_genre">Gênero</string>
+    <string name="pet_weight">Peso</string>
+    <string name="pet_color">Cor</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancelar</string>
+    <string name="add_pet_error">Ops! Não foi possível adicionar o pet.</string>
+    <string name="add_pet_error_sub">Tente novamente mais tarde.</string>
 
 
     <string name="content_arrow_right_icon">Ícone de seta para a direita para prosseguir</string>
+    <string name="content_add">Ícone de mais para adicionar</string>
 </resources>

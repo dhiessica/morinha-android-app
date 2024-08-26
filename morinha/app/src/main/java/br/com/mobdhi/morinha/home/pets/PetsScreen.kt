@@ -1,17 +1,21 @@
-package br.com.mobdhi.morinha.home
+package br.com.mobdhi.morinha.home.pets
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -29,19 +33,22 @@ import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun HomeScreen(
-    viewModel: HomeViewModel = getViewModel()
+    viewModel: PetsViewModel = getViewModel(),
+    navigateToAddPetScreen: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
     HomeContent(
         uiState = uiState,
+        onAddPetButtonClicked = navigateToAddPetScreen,
         modifier = Modifier
     )
 }
 
 @Composable
 fun HomeContent(
-    uiState: HomeUiState,
+    uiState: PetsUiState,
+    onAddPetButtonClicked: () -> Unit,
     modifier: Modifier
 ) {
 
@@ -56,13 +63,23 @@ fun HomeContent(
             ),
         verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium))
         ) {
-        Text(
-            text = stringResource(R.string.pets_title),
-            style = MaterialTheme.typography.displaySmall,
-            fontWeight = FontWeight.Bold
-        )
+        Row {
+            Text(
+                text = stringResource(R.string.pets_title),
+                style = MaterialTheme.typography.displaySmall,
+                fontWeight = FontWeight.Bold
+            )
+            IconButton(onClick = onAddPetButtonClicked) {
+                Icon(
+                    imageVector = Icons.Filled.Add,
+                    contentDescription = stringResource(R.string.content_add),
+                    modifier = Modifier.size(dimensionResource(R.dimen.padding_large))
+                )
+
+            }
+        }
         when(uiState) {
-            is HomeUiState.Loading -> {
+            is PetsUiState.Loading -> {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
@@ -77,7 +94,7 @@ fun HomeContent(
                     )
                 }
             }
-            is HomeUiState.Success -> {
+            is PetsUiState.Success -> {
                 if (!uiState.petList.isNullOrEmpty()) {
                     LazyColumn(
                         verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium)),
@@ -94,7 +111,7 @@ fun HomeContent(
                     }
                 }
             }
-            is HomeUiState.Error -> {
+            is PetsUiState.Error -> {
                 Text(text = " errooo, ${uiState.message}")
                 println("erro ${uiState.message}")
             }
@@ -106,6 +123,8 @@ fun HomeContent(
 @Composable
 fun HomeScreenPreview() {
     MorinhaTheme {
-        HomeScreen()
+        HomeScreen(
+            navigateToAddPetScreen = {}
+        )
     }
 }
