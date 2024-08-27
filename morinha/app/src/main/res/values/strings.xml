@@ -32,8 +32,10 @@
     <string name="vaccines_title">Vacinas</string>
     <string name="x_years_old">%s anos de idade</string>
     <string name="applied_in">aplicado em</string>
+    <string name="vaccines">Vacinas</string>
 
 
     <string name="content_arrow_right_icon">Ícone de seta para a direita para prosseguir</string>
     <string name="content_add">Ícone de mais para adicionar</string>
+    <string name="content_edit">Ícone de lapis para modificar</string>
 </resources>
