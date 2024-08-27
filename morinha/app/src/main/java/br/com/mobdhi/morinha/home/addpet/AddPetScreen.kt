@@ -275,6 +275,6 @@ fun addDotBeforeLastNumber(input: String): String {
 @Composable
 fun AddPetScreenPreview() {
     MorinhaTheme {
-
+        AddPetScreen(navigateBack = {})
     }
 }

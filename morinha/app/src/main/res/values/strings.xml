@@ -29,6 +29,9 @@
     <string name="cancel">Cancelar</string>
     <string name="add_pet_error">Ops! Não foi possível adicionar o pet.</string>
     <string name="add_pet_error_sub">Tente novamente mais tarde.</string>
+    <string name="vaccines_title">Vacinas</string>
+    <string name="x_years_old">%s anos de idade</string>
+    <string name="applied_in">aplicado em</string>
 
 
     <string name="content_arrow_right_icon">Ícone de seta para a direita para prosseguir</string>

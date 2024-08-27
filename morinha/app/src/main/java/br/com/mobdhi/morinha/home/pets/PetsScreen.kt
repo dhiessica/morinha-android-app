@@ -76,7 +76,7 @@ fun HomeContent(
                 Icon(
                     imageVector = Icons.Filled.Add,
                     contentDescription = stringResource(R.string.content_add),
-                    modifier = Modifier.size(dimensionResource(R.dimen.padding_extra_large))
+                    modifier = Modifier.size(dimensionResource(R.dimen.padding_large))
                 )
 
             }
