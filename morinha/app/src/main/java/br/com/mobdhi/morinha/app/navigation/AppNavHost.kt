@@ -9,11 +9,15 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
+import androidx.navigation.toRoute
 import br.com.mobdhi.morinha.domain.repository.AuthRepository
 import br.com.mobdhi.morinha.home.pets.HomeScreen
 import br.com.mobdhi.morinha.auth.login.LoginScreen
 import br.com.mobdhi.morinha.auth.register.RegisterScreen
+import br.com.mobdhi.morinha.domain.model.Pet
+import br.com.mobdhi.morinha.domain.model.Vaccine
 import br.com.mobdhi.morinha.home.addpet.AddPetScreen
+import br.com.mobdhi.morinha.home.vaccines.VaccinesScreen
 import org.koin.java.KoinJavaComponent.get
 
 @Composable
@@ -99,6 +103,7 @@ private fun NavGraphBuilder.addHomeRoute(
     ) {
         showHome(navController)
         showAddPet(navController)
+        showVaccines(navController)
     }
 }
 
@@ -109,7 +114,10 @@ private fun NavGraphBuilder.showHome(
         route = LeafScreens.Home.route
     ) {
         HomeScreen(
-            navigateToAddPetScreen = { navController.navigate(LeafScreens.AddPet.route) }
+            navigateToAddPetScreen = { navController.navigate(LeafScreens.AddPet.route) },
+            navigateToPetVaccinesScreen = {
+                navController.navigate(VaccinesRoute(it))
+            }
         )
     }
 }
@@ -123,6 +131,15 @@ private fun NavGraphBuilder.showAddPet(
         AddPetScreen(
             navigateBack = { navController.navigateUp() }
         )
+    }
+}
+
+private fun NavGraphBuilder.showVaccines(
+    navController: NavController
+) {
+    composable<VaccinesRoute> { backStackEntry ->
+        val pet: Pet = backStackEntry.toRoute()
+        VaccinesScreen(pet)
     }
 }
 

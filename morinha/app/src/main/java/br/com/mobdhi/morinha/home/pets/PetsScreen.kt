@@ -30,6 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.mobdhi.morinha.R
+import br.com.mobdhi.morinha.domain.model.Pet
 import br.com.mobdhi.morinha.ui.components.PetCard
 import br.com.mobdhi.morinha.ui.theme.MorinhaTheme
 import org.koin.androidx.compose.getViewModel
@@ -37,7 +38,8 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 fun HomeScreen(
     viewModel: PetsViewModel = getViewModel(),
-    navigateToAddPetScreen: () -> Unit
+    navigateToAddPetScreen: () -> Unit,
+    navigateToPetVaccinesScreen: (Pet) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
@@ -46,6 +48,7 @@ fun HomeScreen(
     HomeContent(
         uiState = uiState,
         onAddPetButtonClicked = navigateToAddPetScreen,
+        onPetCardClicked = navigateToPetVaccinesScreen,
         modifier = Modifier
     )
 }
@@ -54,6 +57,7 @@ fun HomeScreen(
 fun HomeContent(
     uiState: PetsUiState,
     onAddPetButtonClicked: () -> Unit,
+    onPetCardClicked: (Pet) -> Unit,
     modifier: Modifier
 ) {
 
@@ -104,11 +108,11 @@ fun HomeContent(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = modifier.fillMaxSize()
                     ) {
-                        items(items = uiState.petList) { item ->
+                        items(items = uiState.petList) { pet ->
                             PetCard(
-                                petName = item.name,
-                                petBasicInfo = item.breed,
-                                onClick = {}
+                                petName = pet.name,
+                                petBasicInfo = pet.breed,
+                                onClick = { onPetCardClicked(pet) }
                             )
                         }
                     }
@@ -127,7 +131,8 @@ fun HomeContent(
 fun HomeScreenPreview() {
     MorinhaTheme {
         HomeScreen(
-            navigateToAddPetScreen = {}
+            navigateToAddPetScreen = {},
+            navigateToPetVaccinesScreen = {}
         )
     }
 }

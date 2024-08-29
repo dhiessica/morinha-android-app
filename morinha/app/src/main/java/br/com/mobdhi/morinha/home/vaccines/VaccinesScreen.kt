@@ -52,7 +52,7 @@ import br.com.mobdhi.morinha.ui.theme.PurpleGrey80
 import br.com.mobdhi.morinha.utils.calculateAgeFromDate
 
 @Composable
-fun VaccinesScreen() {
+fun VaccinesScreen(pet: Pet) {
 
     LaunchedEffect(Unit) { /*TODO*/ }
 
@@ -184,6 +184,6 @@ fun VaccinesContent(
 @Composable
 fun VaccinesScreenPreview() {
     MorinhaTheme {
-        VaccinesScreen()
+        VaccinesScreen(Pet())
     }
 }
