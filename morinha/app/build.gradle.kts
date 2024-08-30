@@ -70,10 +70,8 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.navigation)
     implementation(libs.koin.androidx.compose)
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.2")
-
-
-
+    implementation(libs.google.firebase.crashlytics)
+    implementation(libs.jetbrains.kotlin.serialization)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

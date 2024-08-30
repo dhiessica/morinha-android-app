@@ -48,14 +48,3 @@ fun calculateAgeFromDate(dateString: String): Int {
     }
 }
 
-
-
-fun String.isValidDouble(): Boolean {
-    return try {
-        this.toDouble()
-        true
-    } catch (e: NumberFormatException) {
-        false
-    }
-}
-

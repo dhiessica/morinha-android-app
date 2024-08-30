@@ -13,6 +13,7 @@ googleServices = "4.4.2"
 firebaseBom = "33.1.2"
 koin = "3.4.0"
 material3 = "1.2.1"
+serialization = "1.7.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -37,9 +38,11 @@ google-firebase-bom = { group = "com.google.firebase", name = "firebase-bom", ve
 google-firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 google-firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore" }
 google-firebase-auth = { group = "com.google.firebase", name = "firebase-auth" }
+google-firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
 koin-androidx-navigation = { group = "io.insert-koin", name = "koin-androidx-navigation", version.ref = "koin" }
 koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
+jetbrains-kotlin-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serialization" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
