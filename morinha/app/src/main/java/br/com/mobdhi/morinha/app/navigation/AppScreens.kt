@@ -1,6 +1,7 @@
 package br.com.mobdhi.morinha.app.navigation
 
 import br.com.mobdhi.morinha.domain.model.Pet
+import br.com.mobdhi.morinha.domain.model.Vaccine
 import kotlinx.serialization.Serializable
 
 sealed class RootScreen(val route: String) {
@@ -19,3 +20,6 @@ data class VaccinesRoute(val pet: Pet)
 
 @Serializable
 data class AddVaccinesRoute(val petId: String)
+
+@Serializable
+data class EditVaccinesRoute(val vaccine: Vaccine)

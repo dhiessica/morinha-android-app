@@ -33,31 +33,29 @@ import br.com.mobdhi.morinha.ui.components.LoadingCircularProgress
 import br.com.mobdhi.morinha.ui.theme.MorinhaTheme
 import br.com.mobdhi.morinha.utils.convertDateToMillis
 import br.com.mobdhi.morinha.utils.convertMillisToDate
-import org.koin.androidx.compose.getViewModel
 
 
 @Composable
-fun AddVaccineScreen(
-    viewModel: AddVaccineViewModel = getViewModel(),
-    petId: String,
+fun AddEditVaccineScreen(
+    viewModel: AddEditVaccineViewModel,
     navigateBack: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
-    AddPetContent(
+    AddEditVaccineContent(
         uiState = uiState,
-        updateUiState = { viewModel.updateUiState(it.copy(petId = petId)) },
-        onAddVaccineButtonClicked = viewModel::addVaccine,
-        onAddVaccineWithSuccess = navigateBack
+        updateUiState = viewModel::updateUiState,
+        onAddEditVaccineButtonClicked = viewModel::addEditVaccine,
+        onAddEditVaccineWithSuccess = navigateBack
     )
 }
 
 @Composable
-fun AddPetContent(
+fun AddEditVaccineContent(
     uiState: AddVaccineUiState,
     updateUiState: (Vaccine) -> Unit,
-    onAddVaccineButtonClicked: () -> Unit,
-    onAddVaccineWithSuccess: () -> Unit
+    onAddEditVaccineButtonClicked: () -> Unit,
+    onAddEditVaccineWithSuccess: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -66,7 +64,8 @@ fun AddPetContent(
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = stringResource(R.string.add_vaccine_title),
+            text = if (uiState.vaccine.value.id.isNotBlank()) stringResource(R.string.edit_vaccine_title)
+            else stringResource(R.string.add_vaccine_title),
             style = MaterialTheme.typography.displaySmall,
             fontWeight = FontWeight.Bold
         )
@@ -75,16 +74,16 @@ fun AddPetContent(
 
         when (uiState) {
             is AddVaccineUiState.Initial -> {
-                AddVaccineForm(
+                AddEditVaccineForm(
                     vaccine = uiState.vaccine.value,
                     isEntryValid = uiState.isEntryValid.value,
                     updateUiState = updateUiState,
-                    onAddVaccineButtonClicked = onAddVaccineButtonClicked
+                    onAddSaveVaccineButtonClicked = onAddEditVaccineButtonClicked
                 )
             }
 
             is AddVaccineUiState.Success -> {
-                onAddVaccineWithSuccess.invoke()
+                onAddEditVaccineWithSuccess.invoke()
             }
 
             is AddVaccineUiState.Error -> {
@@ -100,10 +99,10 @@ fun AddPetContent(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddVaccineForm(
+fun AddEditVaccineForm(
     vaccine: Vaccine,
     updateUiState: (Vaccine) -> Unit,
-    onAddVaccineButtonClicked: () -> Unit,
+    onAddSaveVaccineButtonClicked: () -> Unit,
     isEntryValid: Boolean
 ) {
     var isNextApplicationDateInput by remember { mutableStateOf(false) }
@@ -185,11 +184,13 @@ fun AddVaccineForm(
                 onDateSelected = {
                     if (isNextApplicationDateInput) {
                         updateUiState(
-                            vaccine.copy(nextApplicationDate = it?.let { convertMillisToDate(it) } ?: "")
+                            vaccine.copy(nextApplicationDate = it?.let { convertMillisToDate(it) }
+                                ?: "")
                         )
                     } else {
                         updateUiState(
-                            vaccine.copy(applicationDate = it?.let { convertMillisToDate(it) } ?: "")
+                            vaccine.copy(applicationDate = it?.let { convertMillisToDate(it) }
+                                ?: "")
                         )
                     }
                 }
@@ -211,9 +212,10 @@ fun AddVaccineForm(
         verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium))
     ) {
         DefaultButton(
-            text = stringResource(R.string.add_button),
+            text = if (vaccine.id.isNotBlank()) stringResource(R.string.save)
+            else stringResource(R.string.add_button),
             enabled = isEntryValid,
-            onClick = { onAddVaccineButtonClicked() }
+            onClick = { onAddSaveVaccineButtonClicked() }
         )
     }
 }
@@ -227,11 +229,11 @@ fun AddVaccineScreenPreview() {
             isEntryValid = remember { mutableStateOf(false) }
         )
 
-        AddPetContent(
+        AddEditVaccineContent(
             uiState = uiState,
             updateUiState = {},
-            onAddVaccineButtonClicked = {},
-            onAddVaccineWithSuccess = {}
+            onAddEditVaccineButtonClicked = {},
+            onAddEditVaccineWithSuccess = {}
         )
     }
 }

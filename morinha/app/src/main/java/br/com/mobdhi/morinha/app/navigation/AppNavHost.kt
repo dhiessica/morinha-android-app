@@ -17,9 +17,13 @@ import br.com.mobdhi.morinha.auth.register.RegisterScreen
 import br.com.mobdhi.morinha.domain.model.Genre
 import br.com.mobdhi.morinha.domain.model.Pet
 import br.com.mobdhi.morinha.domain.model.Specie
+import br.com.mobdhi.morinha.domain.model.Vaccine
 import br.com.mobdhi.morinha.pet.addpet.AddPetScreen
-import br.com.mobdhi.morinha.vaccine.addvaccine.AddVaccineScreen
+import br.com.mobdhi.morinha.vaccine.addvaccine.AddEditVaccineScreen
+import br.com.mobdhi.morinha.vaccine.addvaccine.AddEditVaccineViewModel
 import br.com.mobdhi.morinha.vaccine.vaccines.VaccinesScreen
+import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 import org.koin.java.KoinJavaComponent.get
 import kotlin.reflect.typeOf
 
@@ -65,6 +69,7 @@ private fun NavGraphBuilder.addHomeRoute(
         showAddPet(navController)
         showVaccines(navController)
         showAddVaccine(navController)
+        showEditVaccine(navController)
     }
 }
 
@@ -154,7 +159,7 @@ private fun NavGraphBuilder.showVaccines(
         VaccinesScreen(
             pet = pet.pet,
             navigateToEditPetScreen = {},
-            navigateToVaccineEditScreen = {},
+            navigateToVaccineEditScreen = { navController.navigate(EditVaccinesRoute(it)) },
             navigateToAddVaccineScreen = { navController.navigate(AddVaccinesRoute(it)) }
         )
     }
@@ -163,12 +168,48 @@ private fun NavGraphBuilder.showVaccines(
 private fun NavGraphBuilder.showAddVaccine(
     navController: NavController
 ) {
-    composable<AddVaccinesRoute> { backStackEntry ->
+    composable<AddVaccinesRoute>(
+        typeMap = mapOf(
+            typeOf<Vaccine>() to serializedType<Vaccine>()
+        )
+    ) { backStackEntry ->
 
-        val vaccine = backStackEntry.toRoute<AddVaccinesRoute>()
+        val routeArguments = backStackEntry.toRoute<AddVaccinesRoute>()
 
-        AddVaccineScreen(
-            petId = vaccine.petId,
+        val viewModel =
+            getViewModel<AddEditVaccineViewModel>(parameters = {
+                parametersOf(
+                    routeArguments.petId,
+                    Vaccine()
+                )
+            })
+
+        AddEditVaccineScreen(
+            viewModel = viewModel,
+            navigateBack = { navController.popBackStack<VaccinesRoute>(inclusive = false) }
+        )
+    }
+}
+
+private fun NavGraphBuilder.showEditVaccine(
+    navController: NavController
+) {
+    composable<EditVaccinesRoute>(
+        typeMap = mapOf(
+            typeOf<Vaccine>() to serializedType<Vaccine>()
+        )
+    ) { backStackEntry ->
+
+        val routeArguments = backStackEntry.toRoute<EditVaccinesRoute>()
+        val viewModel = getViewModel<AddEditVaccineViewModel>(parameters = {
+                parametersOf(
+                    routeArguments.vaccine.petId,
+                    routeArguments.vaccine
+                )
+            })
+
+        AddEditVaccineScreen(
+            viewModel = viewModel,
             navigateBack = { navController.popBackStack<VaccinesRoute>(inclusive = false) }
         )
     }

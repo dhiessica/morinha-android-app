@@ -16,4 +16,8 @@ class VaccinesRepositoryImpl(
     override fun addVaccine(vaccine: Vaccine): Flow<Response<String>> {
         return remoteDataSourceImpl.addVaccine(vaccine)
     }
+
+    override fun updateVaccine(vaccine: Vaccine): Flow<Response<String>> {
+        return remoteDataSourceImpl.updateVaccine(vaccine)
+    }
 }

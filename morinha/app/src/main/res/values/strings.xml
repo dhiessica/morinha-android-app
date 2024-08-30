@@ -27,6 +27,7 @@
     <string name="pet_color">Cor</string>
     <string name="ok">Ok</string>
     <string name="cancel">Cancelar</string>
+    <string name="save">Salvar</string>
     <string name="error_title">Ops! Houve um problema ao recuperar as informações.</string>
     <string name="error_sub">Tente novamente mais tarde.</string>
     <string name="empty_title">Esse pet ainda não tem registro de vacinas.</string>
@@ -35,6 +36,7 @@
     <string name="applied_in">aplicado em</string>
     <string name="vaccines">Vacinas</string>
     <string name="add_vaccine_title">Adicionar vacina</string>
+    <string name="edit_vaccine_title">Modificar vacina</string>
     <string name="vaccine_name">Nome da vacina</string>
     <string name="vaccine_manufacturer">Nome do fabricante</string>
     <string name="vaccine_batch_number">Lote de fabricação</string>

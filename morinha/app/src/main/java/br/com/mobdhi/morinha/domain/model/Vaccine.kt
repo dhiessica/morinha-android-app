@@ -1,5 +1,8 @@
 package br.com.mobdhi.morinha.domain.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Vaccine(
     val id: String = "",
     val applicationDate: String = "",
