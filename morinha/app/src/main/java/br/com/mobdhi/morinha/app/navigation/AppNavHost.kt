@@ -19,8 +19,8 @@ import br.com.mobdhi.morinha.domain.model.Pet
 import br.com.mobdhi.morinha.domain.model.Specie
 import br.com.mobdhi.morinha.domain.model.Vaccine
 import br.com.mobdhi.morinha.pet.addpet.AddPetScreen
-import br.com.mobdhi.morinha.vaccine.addvaccine.AddEditVaccineScreen
-import br.com.mobdhi.morinha.vaccine.addvaccine.AddEditVaccineViewModel
+import br.com.mobdhi.morinha.vaccine.addeditvaccine.AddEditVaccineScreen
+import br.com.mobdhi.morinha.vaccine.addeditvaccine.AddEditVaccineViewModel
 import br.com.mobdhi.morinha.vaccine.vaccines.VaccinesScreen
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf

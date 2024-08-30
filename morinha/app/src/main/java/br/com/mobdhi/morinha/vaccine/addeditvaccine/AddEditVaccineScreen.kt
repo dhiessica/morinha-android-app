@@ -1,4 +1,4 @@
-package br.com.mobdhi.morinha.vaccine.addvaccine
+package br.com.mobdhi.morinha.vaccine.addeditvaccine
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -46,15 +46,17 @@ fun AddEditVaccineScreen(
         uiState = uiState,
         updateUiState = viewModel::updateUiState,
         onAddEditVaccineButtonClicked = viewModel::addEditVaccine,
+        onDeleteVaccineButtonClicked = viewModel::deleteVaccine,
         onAddEditVaccineWithSuccess = navigateBack
     )
 }
 
 @Composable
 fun AddEditVaccineContent(
-    uiState: AddVaccineUiState,
+    uiState: AddEditVaccineUiState,
     updateUiState: (Vaccine) -> Unit,
     onAddEditVaccineButtonClicked: () -> Unit,
+    onDeleteVaccineButtonClicked: () -> Unit,
     onAddEditVaccineWithSuccess: () -> Unit
 ) {
     Column(
@@ -73,24 +75,25 @@ fun AddEditVaccineContent(
         Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium)))
 
         when (uiState) {
-            is AddVaccineUiState.Initial -> {
+            is AddEditVaccineUiState.Initial -> {
                 AddEditVaccineForm(
                     vaccine = uiState.vaccine.value,
                     isEntryValid = uiState.isEntryValid.value,
                     updateUiState = updateUiState,
-                    onAddSaveVaccineButtonClicked = onAddEditVaccineButtonClicked
+                    onAddEditVaccineButtonClicked = onAddEditVaccineButtonClicked,
+                    onDeleteVaccineButtonClicked = onDeleteVaccineButtonClicked
                 )
             }
 
-            is AddVaccineUiState.Success -> {
+            is AddEditVaccineUiState.Success -> {
                 onAddEditVaccineWithSuccess.invoke()
             }
 
-            is AddVaccineUiState.Error -> {
+            is AddEditVaccineUiState.Error -> {
                 ErrorMessage()
             }
 
-            is AddVaccineUiState.Loading -> {
+            is AddEditVaccineUiState.Loading -> {
                 LoadingCircularProgress()
             }
         }
@@ -102,7 +105,8 @@ fun AddEditVaccineContent(
 fun AddEditVaccineForm(
     vaccine: Vaccine,
     updateUiState: (Vaccine) -> Unit,
-    onAddSaveVaccineButtonClicked: () -> Unit,
+    onAddEditVaccineButtonClicked: () -> Unit,
+    onDeleteVaccineButtonClicked: () -> Unit,
     isEntryValid: Boolean
 ) {
     var isNextApplicationDateInput by remember { mutableStateOf(false) }
@@ -215,8 +219,17 @@ fun AddEditVaccineForm(
             text = if (vaccine.id.isNotBlank()) stringResource(R.string.save)
             else stringResource(R.string.add_button),
             enabled = isEntryValid,
-            onClick = { onAddSaveVaccineButtonClicked() }
+            onClick = { onAddEditVaccineButtonClicked() }
         )
+        if (vaccine.id.isNotBlank()) {
+            DefaultOutlinedButton(
+                color = MaterialTheme.colorScheme.error,
+                enabled = true,
+                hasIcon = false,
+                text = stringResource(R.string.vaccine_exclude),
+                onClick = { onDeleteVaccineButtonClicked() }
+            )
+        }
     }
 }
 
@@ -224,8 +237,8 @@ fun AddEditVaccineForm(
 @Composable
 fun AddVaccineScreenPreview() {
     MorinhaTheme {
-        val uiState = AddVaccineUiState.Initial(
-            vaccine = remember { mutableStateOf(Vaccine()) },
+        val uiState = AddEditVaccineUiState.Initial(
+            vaccine = remember { mutableStateOf(Vaccine("ndsj")) },
             isEntryValid = remember { mutableStateOf(false) }
         )
 
@@ -233,7 +246,8 @@ fun AddVaccineScreenPreview() {
             uiState = uiState,
             updateUiState = {},
             onAddEditVaccineButtonClicked = {},
-            onAddEditVaccineWithSuccess = {}
+            onAddEditVaccineWithSuccess = {},
+            onDeleteVaccineButtonClicked = {}
         )
     }
 }

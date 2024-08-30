@@ -9,4 +9,5 @@ interface VaccinesRepository {
     fun getVaccines(pet: Pet): Flow<Response<List<Vaccine>>>
     fun addVaccine(vaccine: Vaccine): Flow<Response<String>>
     fun updateVaccine(vaccine: Vaccine): Flow<Response<String>>
+    fun deleteVaccine(vaccine: Vaccine): Flow<Response<String>>
 }

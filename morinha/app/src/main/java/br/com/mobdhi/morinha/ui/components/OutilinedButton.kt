@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
-import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -29,18 +28,17 @@ fun DefaultOutlinedButton(
     text: String,
     enabled: Boolean,
     onClick: () -> Unit,
-    hasIcon: Boolean = false
+    hasIcon: Boolean = false,
+    color: Color = MaterialTheme.colorScheme.primary
 ) {
-    val primaryColor = MaterialTheme.colorScheme.primary
-
     Button(
         onClick = onClick,
         enabled = enabled,
         shape = MaterialTheme.shapes.small,
-        border = BorderStroke(1.dp, primaryColor),
+        border = BorderStroke(1.dp, color),
         colors = ButtonDefaults.buttonColors(
             containerColor = Color.Transparent,
-            contentColor = primaryColor,
+            contentColor = color,
         ),
         modifier = Modifier.fillMaxWidth()
     ) {

@@ -73,4 +73,20 @@ class VaccinesRemoteDataSourceImpl(
             )
         }
     }
+
+    override fun deleteVaccine(vaccine: Vaccine): Flow<Response<String>> {
+        return flow {
+            emit(Response.Loading())
+
+            val result = dataBase.collection(VACCINES).document(vaccine.id).delete().await()
+
+            emit(Response.Success(data = "$result"))
+        }.catch {
+            emit(
+                Response.Error(
+                    message = "Error ${it.message} \n Cause ${it.cause} \n Stack ${it.stackTrace}"
+                )
+            )
+        }
+    }
 }

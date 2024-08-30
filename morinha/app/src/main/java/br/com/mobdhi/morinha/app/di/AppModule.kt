@@ -4,14 +4,13 @@ import br.com.mobdhi.morinha.domain.repository.AuthRepository
 import br.com.mobdhi.morinha.auth.AuthRepositoryImpl
 import br.com.mobdhi.morinha.auth.login.LoginViewModel
 import br.com.mobdhi.morinha.auth.register.RegisterViewModel
-import br.com.mobdhi.morinha.domain.model.Vaccine
 import br.com.mobdhi.morinha.domain.repository.PetRepository
 import br.com.mobdhi.morinha.domain.repository.VaccinesRepository
 import br.com.mobdhi.morinha.pet.addpet.AddPetViewModel
 import br.com.mobdhi.morinha.pet.data.PetRepositoryImpl
 import br.com.mobdhi.morinha.pet.pets.PetsViewModel
 import br.com.mobdhi.morinha.pet.data.PetRemoteDataSourceImpl
-import br.com.mobdhi.morinha.vaccine.addvaccine.AddEditVaccineViewModel
+import br.com.mobdhi.morinha.vaccine.addeditvaccine.AddEditVaccineViewModel
 import br.com.mobdhi.morinha.vaccine.vaccines.VaccinesViewModel
 import br.com.mobdhi.morinha.vaccine.data.VaccinesRemoteDataSourceImpl
 import br.com.mobdhi.morinha.vaccine.data.VaccinesRepositoryImpl

@@ -1,4 +1,4 @@
-package br.com.mobdhi.morinha.vaccine.addvaccine
+package br.com.mobdhi.morinha.vaccine.addeditvaccine
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -17,8 +17,8 @@ class AddEditVaccineViewModel(
     private val vaccinesRepository: VaccinesRepository
 ) : ViewModel() {
 
-    var uiState = MutableStateFlow<AddVaccineUiState>(
-        AddVaccineUiState.Initial(
+    var uiState = MutableStateFlow<AddEditVaccineUiState>(
+        AddEditVaccineUiState.Initial(
             vaccine = mutableStateOf(Vaccine()),
             isEntryValid = mutableStateOf(false)
         )
@@ -33,24 +33,23 @@ class AddEditVaccineViewModel(
         else addVaccine(vaccine)
     }
 
-    private fun updateVaccine(vaccine: Vaccine = uiState.value.vaccine.value) = viewModelScope.launch {
-        if (validateInput(vaccine.copy(petId = petId))) {
-            vaccinesRepository.updateVaccine(vaccine).collectLatest { result ->
-                when (result) {
-                    is Response.Loading -> {
-                        uiState.update { AddVaccineUiState.Loading() }
-                    }
+    fun deleteVaccine(vaccine: Vaccine = uiState.value.vaccine.value) = viewModelScope.launch {
+        vaccinesRepository.deleteVaccine(vaccine).collectLatest { result ->
+            when (result) {
+                is Response.Loading -> {
+                    uiState.update { AddEditVaccineUiState.Loading() }
+                }
 
-                    is Response.Success -> {
-                        uiState.update { AddVaccineUiState.Success() }
-                    }
+                is Response.Success -> {
+                    uiState.update { AddEditVaccineUiState.Success() }
+                }
 
-                    is Response.Error -> {
-                        uiState.update { AddVaccineUiState.Error(result.message) }
-                    }
+                is Response.Error -> {
+                    uiState.update { AddEditVaccineUiState.Error(result.message) }
                 }
             }
         }
+
     }
 
     private fun addVaccine(vaccine: Vaccine = uiState.value.vaccine.value) = viewModelScope.launch {
@@ -58,15 +57,35 @@ class AddEditVaccineViewModel(
             vaccinesRepository.addVaccine(vaccine).collectLatest { result ->
                 when (result) {
                     is Response.Loading -> {
-                        uiState.update { AddVaccineUiState.Loading() }
+                        uiState.update { AddEditVaccineUiState.Loading() }
                     }
 
                     is Response.Success -> {
-                        uiState.update { AddVaccineUiState.Success() }
+                        uiState.update { AddEditVaccineUiState.Success() }
                     }
 
                     is Response.Error -> {
-                        uiState.update { AddVaccineUiState.Error(result.message) }
+                        uiState.update { AddEditVaccineUiState.Error(result.message) }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun updateVaccine(vaccine: Vaccine = uiState.value.vaccine.value) = viewModelScope.launch {
+        if (validateInput(vaccine.copy(petId = petId))) {
+            vaccinesRepository.updateVaccine(vaccine).collectLatest { result ->
+                when (result) {
+                    is Response.Loading -> {
+                        uiState.update { AddEditVaccineUiState.Loading() }
+                    }
+
+                    is Response.Success -> {
+                        uiState.update { AddEditVaccineUiState.Success() }
+                    }
+
+                    is Response.Error -> {
+                        uiState.update { AddEditVaccineUiState.Error(result.message) }
                     }
                 }
             }

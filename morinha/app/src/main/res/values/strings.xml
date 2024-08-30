@@ -44,6 +44,7 @@
     <string name="vaccine_observation">Observações (Opcional)</string>
     <string name="vaccine_application_date">Data de aplicação</string>
     <string name="vaccine_next_application_date">Data da próxima aplicação</string>
+    <string name="vaccine_exclude">Apagar registro de vacina</string>
 
 
     <string name="content_arrow_right_icon">Ícone de seta para a direita para prosseguir</string>
