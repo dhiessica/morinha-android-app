@@ -11,6 +11,6 @@ sealed class AddPetUiState(
 ) {
     class Initial(pet: MutableState<Pet>, isEntryValid: MutableState<Boolean>) : AddPetUiState(pet, isEntryValid)
     class Success : AddPetUiState()
-    class Error(message: String?, pet: Pet? = null) : AddPetUiState()
+    class Error(message: String?, pet: Pet? = null) : AddPetUiState(message = message)
     class Loading : AddPetUiState()
 }

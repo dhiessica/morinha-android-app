@@ -2,12 +2,10 @@ package br.com.mobdhi.morinha.vaccine.addvaccine
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.DisplayMode
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -23,11 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.text.isDigitsOnly
 import br.com.mobdhi.morinha.R
-import br.com.mobdhi.morinha.domain.model.Pet
 import br.com.mobdhi.morinha.domain.model.Vaccine
 import br.com.mobdhi.morinha.ui.components.DatePickerModal
 import br.com.mobdhi.morinha.ui.components.DefaultButton
@@ -35,9 +30,7 @@ import br.com.mobdhi.morinha.ui.components.DefaultOutlinedButton
 import br.com.mobdhi.morinha.ui.components.DefaultTextField
 import br.com.mobdhi.morinha.ui.components.ErrorMessage
 import br.com.mobdhi.morinha.ui.components.LoadingCircularProgress
-import br.com.mobdhi.morinha.ui.components.RadioButtonOption
 import br.com.mobdhi.morinha.ui.theme.MorinhaTheme
-import br.com.mobdhi.morinha.utils.CurrencyAmountInputVisualTransformation
 import br.com.mobdhi.morinha.utils.convertDateToMillis
 import br.com.mobdhi.morinha.utils.convertMillisToDate
 import org.koin.androidx.compose.getViewModel

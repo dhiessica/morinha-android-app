@@ -11,6 +11,6 @@ sealed class AddVaccineUiState(
 ) {
     class Initial(vaccine: MutableState<Vaccine>, isEntryValid: MutableState<Boolean>) : AddVaccineUiState(vaccine, isEntryValid)
     class Success : AddVaccineUiState()
-    class Error(message: String?, vaccine: Vaccine? = null) : AddVaccineUiState()
+    class Error(message: String?, vaccine: Vaccine? = null) : AddVaccineUiState(message = message)
     class Loading : AddVaccineUiState()
 }
