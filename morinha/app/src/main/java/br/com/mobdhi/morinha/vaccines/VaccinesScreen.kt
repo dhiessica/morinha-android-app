@@ -19,6 +19,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.ErrorOutline
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.EditAttributes
 import androidx.compose.material.icons.outlined.EditNote
@@ -95,7 +96,7 @@ fun VaccinesContent(
         Column(
             modifier = Modifier
                 .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
-                .background(Color.Gray)
+                .background(MaterialTheme.colorScheme.surfaceVariant)
                 .padding(
                     top = dimensionResource(R.dimen.padding_large),
                     start = dimensionResource(R.dimen.padding_large),
@@ -142,7 +143,7 @@ fun VaccinesContent(
                                 )
                             }
                         }
-                    }
+                    } else EmptyMessage()
                 }
 
                 is VaccinesUiState.Error -> {
@@ -178,6 +179,7 @@ fun PetInfoHeader(
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
+                Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_small)))
                 Row {
                     Text(
                         text = pet.breed,
@@ -193,6 +195,7 @@ fun PetInfoHeader(
                         overflow = TextOverflow.Ellipsis
                     )
                 }
+                Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_small)))
                 Text(
                     text = if(petAge >= 0) stringResource(R.string.x_years_old, petAge)
                     else pet.bornDate,
@@ -210,10 +213,30 @@ fun PetInfoHeader(
             }
         }
     }
-
-    Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_large)))
+    Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_divisor)))
 }
 
+@Composable
+fun EmptyMessage() {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Icon(
+            imageVector = Icons.Filled.Info,
+            contentDescription = stringResource(R.string.content_error_icon),
+            modifier = Modifier.size(dimensionResource(R.dimen.padding_large))
+        )
+        Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium)))
+        Text(
+            text = stringResource(R.string.empty_title),
+            style = MaterialTheme.typography.titleLarge,
+            textAlign = TextAlign.Center,
+            fontWeight = FontWeight.Bold
+        )
+    }
+}
 @Preview(showSystemUi = true)
 @Composable
 fun VaccinesScreenPreview() {

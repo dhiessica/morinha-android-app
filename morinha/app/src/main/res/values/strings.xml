@@ -29,6 +29,7 @@
     <string name="cancel">Cancelar</string>
     <string name="error_title">Ops! Houve um problema ao recuperar as informações.</string>
     <string name="error_sub">Tente novamente mais tarde.</string>
+    <string name="empty_title">Esse pet ainda não tem registro de vacinas.</string>
     <string name="vaccines_title">Vacinas</string>
     <string name="x_years_old">%s anos de idade</string>
     <string name="applied_in">aplicado em</string>
