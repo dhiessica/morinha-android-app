@@ -8,12 +8,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -28,7 +26,6 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import br.com.mobdhi.morinha.R
 import br.com.mobdhi.morinha.domain.model.Pet
 import br.com.mobdhi.morinha.ui.components.ErrorMessage
@@ -38,7 +35,7 @@ import br.com.mobdhi.morinha.ui.theme.MorinhaTheme
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun HomeScreen(
+fun PetsScreen(
     viewModel: PetsViewModel = getViewModel(),
     navigateToAddPetScreen: () -> Unit,
     navigateToPetVaccinesScreen: (Pet) -> Unit
@@ -47,7 +44,7 @@ fun HomeScreen(
 
     LaunchedEffect(Unit) { viewModel.getPets() }
 
-    HomeContent(
+    PetsContent(
         uiState = uiState,
         onAddPetButtonClicked = navigateToAddPetScreen,
         onPetCardClicked = navigateToPetVaccinesScreen,
@@ -56,7 +53,7 @@ fun HomeScreen(
 }
 
 @Composable
-fun HomeContent(
+fun PetsContent(
     uiState: PetsUiState,
     onAddPetButtonClicked: () -> Unit,
     onPetCardClicked: (Pet) -> Unit,
@@ -119,9 +116,11 @@ fun HomeContent(
 @Composable
 fun HomeScreenPreview() {
     MorinhaTheme {
-        HomeScreen(
-            navigateToAddPetScreen = {},
-            navigateToPetVaccinesScreen = {}
+        PetsContent(
+            uiState = PetsUiState.Success(listOf(Pet())),
+            onPetCardClicked = {},
+            onAddPetButtonClicked = {},
+            modifier = Modifier
         )
     }
 }

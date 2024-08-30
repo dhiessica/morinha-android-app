@@ -89,7 +89,7 @@ fun VaccinesContent(
                 .padding(
                     top = dimensionResource(R.dimen.padding_large),
                     start = dimensionResource(R.dimen.padding_large),
-                    end = dimensionResource(R.dimen.padding_large)
+                    end = dimensionResource(R.dimen.padding_large),
                 )
                 .fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium))
@@ -202,7 +202,7 @@ fun PetInfoHeader(
             }
         }
     }
-    Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_divisor)))
+    Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_large)))
 }
 
 @Composable

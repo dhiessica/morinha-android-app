@@ -11,7 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.toRoute
 import br.com.mobdhi.morinha.domain.repository.AuthRepository
-import br.com.mobdhi.morinha.pet.pets.HomeScreen
+import br.com.mobdhi.morinha.pet.pets.PetsScreen
 import br.com.mobdhi.morinha.auth.login.LoginScreen
 import br.com.mobdhi.morinha.auth.register.RegisterScreen
 import br.com.mobdhi.morinha.domain.model.Genre
@@ -124,7 +124,7 @@ private fun NavGraphBuilder.showHome(
     composable(
         route = LeafScreens.Home.route
     ) {
-        HomeScreen(
+        PetsScreen(
             navigateToAddPetScreen = { navController.navigate(LeafScreens.AddPet.route) },
             navigateToPetVaccinesScreen = { navController.navigate(VaccinesRoute(it)) }
         )
