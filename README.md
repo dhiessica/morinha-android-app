@@ -12,14 +12,14 @@ App para registro de vacinas de cães e gatos. Para utilizar o app o usuário de
 ### Pet
 - 🟡Listar pets
 - 🟡Cadastrar pet
-- Editar perfil pet
-- Excluir perfil pet
+- 🟡Editar perfil pet
+- 🟡Excluir perfil pet
 
 ### Vacinas
 - 🟡Listar vacinas
 - 🟡Cadastrar vacina
-- Editar vacina
-- Excluir vacina
+- 🟡Editar vacina
+- 🟡Excluir vacina
 
 ## Em uso
 
