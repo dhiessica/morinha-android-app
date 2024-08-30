@@ -28,28 +28,10 @@ class AddEditVaccineViewModel(
     init {
         updateUiState(currentVaccine)
     }
+
     fun addEditVaccine(vaccine: Vaccine = uiState.value.vaccine.value) {
         if (vaccine.id.isNotBlank()) updateVaccine(vaccine)
         else addVaccine(vaccine)
-    }
-
-    fun deleteVaccine(vaccine: Vaccine = uiState.value.vaccine.value) = viewModelScope.launch {
-        vaccinesRepository.deleteVaccine(vaccine).collectLatest { result ->
-            when (result) {
-                is Response.Loading -> {
-                    uiState.update { AddEditVaccineUiState.Loading() }
-                }
-
-                is Response.Success -> {
-                    uiState.update { AddEditVaccineUiState.Success() }
-                }
-
-                is Response.Error -> {
-                    uiState.update { AddEditVaccineUiState.Error(result.message) }
-                }
-            }
-        }
-
     }
 
     private fun addVaccine(vaccine: Vaccine = uiState.value.vaccine.value) = viewModelScope.launch {
@@ -87,6 +69,24 @@ class AddEditVaccineViewModel(
                     is Response.Error -> {
                         uiState.update { AddEditVaccineUiState.Error(result.message) }
                     }
+                }
+            }
+        }
+    }
+
+    fun deleteVaccine(vaccine: Vaccine = uiState.value.vaccine.value) = viewModelScope.launch {
+        vaccinesRepository.deleteVaccine(vaccine).collectLatest { result ->
+            when (result) {
+                is Response.Loading -> {
+                    uiState.update { AddEditVaccineUiState.Loading() }
+                }
+
+                is Response.Success -> {
+                    uiState.update { AddEditVaccineUiState.Success() }
+                }
+
+                is Response.Error -> {
+                    uiState.update { AddEditVaccineUiState.Error(result.message) }
                 }
             }
         }

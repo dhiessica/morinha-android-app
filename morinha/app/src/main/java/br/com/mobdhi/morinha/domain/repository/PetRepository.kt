@@ -7,4 +7,6 @@ import kotlinx.coroutines.flow.Flow
 interface PetRepository {
     fun getPets(): Flow<Response<List<Pet>>>
     fun addPet(pet: Pet): Flow<Response<String>>
+    fun updatePet(pet: Pet): Flow<Response<String>>
+    fun deletePet(pet: Pet): Flow<Response<String>>
 }

@@ -15,4 +15,12 @@ class PetRepositoryImpl(
     override fun addPet(pet: Pet): Flow<Response<String>> {
         return remoteDataSourceImpl.addPets(pet)
     }
+
+    override fun updatePet(pet: Pet): Flow<Response<String>> {
+        return remoteDataSourceImpl.updatePet(pet)
+    }
+
+    override fun deletePet(pet: Pet): Flow<Response<String>> {
+        return remoteDataSourceImpl.deletePet(pet)
+    }
 }

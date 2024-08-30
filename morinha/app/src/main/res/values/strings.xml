@@ -14,6 +14,7 @@
     <string name="error_password_length_min">A senha precisa ter no mmínimo 6 caracteres</string>
     <string name="pets_title">Meus pets</string>
     <string name="add_pet_title">Adicionar pet</string>
+    <string name="edit_pet_title">Modificar pet</string>
     <string name="pet_name">Nome do pet</string>
     <string name="pet_specie">Espécie</string>
     <string name="pet_dog">Cão</string>
@@ -45,6 +46,7 @@
     <string name="vaccine_application_date">Data de aplicação</string>
     <string name="vaccine_next_application_date">Data da próxima aplicação</string>
     <string name="vaccine_exclude">Apagar registro de vacina</string>
+    <string name="pet_exclude">Apagar pet</string>
 
 
     <string name="content_arrow_right_icon">Ícone de seta para a direita para prosseguir</string>

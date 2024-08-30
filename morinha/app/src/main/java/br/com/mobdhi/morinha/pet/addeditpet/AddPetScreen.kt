@@ -1,20 +1,15 @@
-package br.com.mobdhi.morinha.pet.addpet
+package br.com.mobdhi.morinha.pet.addeditpet
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ErrorOutline
 import androidx.compose.material3.DisplayMode
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDatePickerState
@@ -24,13 +19,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.text.isDigitsOnly
 import br.com.mobdhi.morinha.R
@@ -48,6 +41,7 @@ import br.com.mobdhi.morinha.ui.components.LoadingCircularProgress
 import br.com.mobdhi.morinha.ui.components.RadioButtonOption
 import br.com.mobdhi.morinha.ui.theme.MorinhaTheme
 import br.com.mobdhi.morinha.utils.CurrencyAmountInputVisualTransformation
+import br.com.mobdhi.morinha.utils.convertDateToMillis
 import br.com.mobdhi.morinha.utils.convertMillisToDate
 import org.koin.androidx.compose.getViewModel
 
@@ -61,7 +55,8 @@ fun AddPetScreen(
     AddPetContent(
         uiState = uiState,
         updateUiState = viewModel::updateUiState,
-        onAddPetButtonClicked = viewModel::addPet,
+        onAddPetButtonClicked = viewModel::addEditPet,
+        onDeletePetButtonClicked = viewModel::deletePet,
         onAddPetWithSuccess = navigateBack
     )
 }
@@ -71,6 +66,7 @@ fun AddPetContent(
     uiState: AddPetUiState,
     updateUiState: (Pet) -> Unit,
     onAddPetButtonClicked: () -> Unit,
+    onDeletePetButtonClicked: () -> Unit,
     onAddPetWithSuccess: () -> Unit
 ) {
     Column(
@@ -80,7 +76,8 @@ fun AddPetContent(
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = stringResource(R.string.add_pet_title),
+            text = if (uiState.pet.value.id.isNotBlank()) stringResource(R.string.edit_pet_title)
+            else stringResource(R.string.add_pet_title),
             style = MaterialTheme.typography.displaySmall,
             fontWeight = FontWeight.Bold
         )
@@ -93,7 +90,8 @@ fun AddPetContent(
                     specieOptions = getDefaultSpecies(),
                     genreOptions = getDefaultGenres(),
                     updateUiState = updateUiState,
-                    onAddPetButtonClicked = onAddPetButtonClicked
+                    onAddPetButtonClicked = onAddPetButtonClicked,
+                    onDeletePetButtonClicked = onDeletePetButtonClicked
                 )
             }
 
@@ -120,12 +118,11 @@ fun AddPetForm(
     genreOptions: List<Genre>,
     updateUiState: (Pet) -> Unit,
     onAddPetButtonClicked: () -> Unit,
+    onDeletePetButtonClicked: () -> Unit,
     isEntryValid: Boolean
 ) {
     var showDatePicker by remember { mutableStateOf(false) }
     val datePickerState = rememberDatePickerState(initialDisplayMode = DisplayMode.Input)
-
-    val selectedDate = datePickerState.selectedDateMillis?.let { convertMillisToDate(it) } ?: ""
 
     Column(
         verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium)),
@@ -174,19 +171,30 @@ fun AddPetForm(
             onValueChange = { updateUiState(pet.copy(color = it)) }
         )
         DefaultOutlinedButton(
-            text = selectedDate.ifBlank { stringResource(R.string.pet_born_date) },
             enabled = true,
             hasIcon = true,
-            onClick = { showDatePicker = true }
+            text = pet.bornDate.ifBlank {
+                stringResource(R.string.pet_born_date)
+                                        },
+            onClick = {
+                showDatePicker = true
+                datePickerState.selectedDateMillis = convertDateToMillis(
+                    pet.bornDate
+                )
+            }
         )
 
         if (showDatePicker) {
             DatePickerModal(
                 datePickerState = datePickerState,
-                onDateSelected = { },
                 onDismiss = {
+                    datePickerState.selectedDateMillis = null
                     showDatePicker = false
-                    updateUiState(pet.copy(bornDate = selectedDate))
+                },
+                onDateSelected = {
+                    updateUiState(pet.copy(bornDate = it?.let { convertMillisToDate(it) }
+                        ?: "")
+                    )
                 }
             )
         }
@@ -215,7 +223,7 @@ fun AddPetForm(
                     text = specieOptions.last().name,
                     selected = pet.specie.id == specieOptions.last().id,
                     onSelected = {
-                        updateUiState(pet.copy(specie = specieOptions.first()))
+                        updateUiState(pet.copy(specie = specieOptions.last()))
                     }
                 )
                 RadioButtonOption(
@@ -234,10 +242,20 @@ fun AddPetForm(
         verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium))
     ) {
         DefaultButton(
-            text = stringResource(R.string.add_button),
+            text = if (pet.id.isNotBlank()) stringResource(R.string.save)
+            else stringResource(R.string.add_button),
             enabled = isEntryValid,
             onClick = { onAddPetButtonClicked() }
         )
+        if (pet.id.isNotBlank()) {
+            DefaultOutlinedButton(
+                color = MaterialTheme.colorScheme.error,
+                enabled = true,
+                hasIcon = false,
+                text = stringResource(R.string.pet_exclude),
+                onClick = { onDeletePetButtonClicked() }
+            )
+        }
     }
 }
 

@@ -8,4 +8,6 @@ import kotlinx.coroutines.flow.Flow
 interface PetDataSource {
     fun getPets(): Flow<Response<List<Pet>>>
     fun addPets(pet: Pet): Flow<Response<String>>
+    fun updatePet(pet: Pet): Flow<Response<String>>
+    fun deletePet(pet: Pet): Flow<Response<String>>
 }
