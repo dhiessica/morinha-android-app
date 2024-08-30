@@ -17,7 +17,7 @@ App para registro de vacinas de cães e gatos. Para utilizar o app o usuário de
 
 ### Vacinas
 - 🟡Listar vacinas
-- Cadastrar vacina
+- 🟡Cadastrar vacina
 - Editar vacina
 - Excluir vacina
 
