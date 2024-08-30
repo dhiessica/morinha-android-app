@@ -62,7 +62,7 @@ fun VaccinesScreen(pet: Pet) {
     )
 
     VaccinesContent(
-        pet = Pet(name = "Amora", breed = "Yorshire Terrier", weight = "4.3", bornDate = "07/06/2021"),
+        pet = pet,
         vaccinesList = vaccinesList,
         onEditPetButtonClicked = {},
         onAddVaccineButtonClicked = {},
@@ -133,7 +133,7 @@ fun VaccinesContent(
         Column(
             modifier = Modifier
                 .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
-                .background(PurpleGrey80)
+                .background(Color.Gray)
                 .padding(
                     top = dimensionResource(R.dimen.padding_large),
                     start = dimensionResource(R.dimen.padding_large),

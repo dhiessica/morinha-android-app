@@ -14,11 +14,13 @@ import br.com.mobdhi.morinha.domain.repository.AuthRepository
 import br.com.mobdhi.morinha.home.pets.HomeScreen
 import br.com.mobdhi.morinha.auth.login.LoginScreen
 import br.com.mobdhi.morinha.auth.register.RegisterScreen
+import br.com.mobdhi.morinha.domain.model.Genre
 import br.com.mobdhi.morinha.domain.model.Pet
-import br.com.mobdhi.morinha.domain.model.Vaccine
+import br.com.mobdhi.morinha.domain.model.Specie
 import br.com.mobdhi.morinha.home.addpet.AddPetScreen
 import br.com.mobdhi.morinha.home.vaccines.VaccinesScreen
 import org.koin.java.KoinJavaComponent.get
+import kotlin.reflect.typeOf
 
 @Composable
 fun AppNavHost(
@@ -68,7 +70,8 @@ private fun NavGraphBuilder.showLogin(
                 }
             },
             navigateToForgotPasswordScreen = {
-                Toast.makeText(context, "Funcionalidade ainda não implementada", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Funcionalidade ainda não implementada", Toast.LENGTH_LONG)
+                    .show()
 
             },
             navigateToRegisterScreen = { navController.navigate(LeafScreens.Register.route) },
@@ -137,9 +140,15 @@ private fun NavGraphBuilder.showAddPet(
 private fun NavGraphBuilder.showVaccines(
     navController: NavController
 ) {
-    composable<VaccinesRoute> { backStackEntry ->
-        val pet: Pet = backStackEntry.toRoute()
-        VaccinesScreen(pet)
+    composable<VaccinesRoute>(
+        typeMap = mapOf(
+            typeOf<Pet>() to serializedType<Pet>(),
+            typeOf<Genre>() to serializedType<Genre>(),
+            typeOf<Specie>() to serializedType<Specie>()
+        )
+    ) { backStackEntry ->
+        val pet = backStackEntry.toRoute<VaccinesRoute>()
+        VaccinesScreen(pet.pet)
     }
 }
 

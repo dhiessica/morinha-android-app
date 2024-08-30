@@ -12,10 +12,7 @@ sealed class LeafScreens(val route: String) {
     object Login : LeafScreens(route = "login")
     object Register : LeafScreens(route = "register")
     object AddPet : LeafScreens(route = "add_pet")
-    object Vaccines : LeafScreens(route = "vaccines")
 }
 
 @Serializable
-data class VaccinesRoute(
-    val pet: Pet
-)
+data class VaccinesRoute(val pet: Pet)
