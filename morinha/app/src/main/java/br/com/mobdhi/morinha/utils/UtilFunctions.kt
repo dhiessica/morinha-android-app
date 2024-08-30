@@ -14,21 +14,14 @@ fun convertMillisToDate(millis: Long): String {
     return formatter.format(Date(millis))
 }
 
-fun convertMillisToTimestamp(selectedDateMillis: Long): Timestamp {
-    val date = Date(selectedDateMillis)
-    return Timestamp(date)
-}
-
-fun convertTimestampToLocalDate(timestamp: Timestamp): LocalDate {
-    val date: Date = timestamp.toDate()
-    return date.toInstant()
-        .atZone(ZoneId.systemDefault())
-        .toLocalDate()
-}
-
-fun convertTimestampToFormattedString(timestamp: Timestamp): String {
-    val date: Date = timestamp.toDate()
-    return convertMillisToDate(date.time)
+fun convertDateToMillis(dateString: String): Long? {
+    val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+    return try {
+        val date: Date? = formatter.parse(dateString)
+        date?.time
+    } catch (e: ParseException) {
+        null
+    }
 }
 
 fun calculateAgeFromDate(dateString: String): Int {

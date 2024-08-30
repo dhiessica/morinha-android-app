@@ -49,7 +49,10 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 fun VaccinesScreen(
     pet: Pet,
-    viewModel: VaccinesViewModel = getViewModel()
+    viewModel: VaccinesViewModel = getViewModel(),
+    navigateToEditPetScreen: (Pet) -> Unit,
+    navigateToAddVaccineScreen: (String) -> Unit,
+    navigateToVaccineEditScreen: (Vaccine) -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
@@ -58,9 +61,9 @@ fun VaccinesScreen(
     VaccinesContent(
         pet = pet,
         uiState = uiState,
-        onEditPetButtonClicked = {},
-        onAddVaccineButtonClicked = {},
-        onVaccineItemClicked = {}
+        onEditPetButtonClicked = navigateToEditPetScreen,
+        onAddVaccineButtonClicked = navigateToAddVaccineScreen,
+        onVaccineItemClicked = navigateToVaccineEditScreen
     )
 }
 
@@ -70,7 +73,7 @@ fun VaccinesContent(
     pet: Pet,
     uiState: VaccinesUiState,
     onEditPetButtonClicked: (Pet) -> Unit,
-    onAddVaccineButtonClicked: () -> Unit,
+    onAddVaccineButtonClicked: (String) -> Unit,
     onVaccineItemClicked: (Vaccine) -> Unit
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
@@ -100,7 +103,7 @@ fun VaccinesContent(
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
-                IconButton(onClick = { onAddVaccineButtonClicked() }) {
+                IconButton(onClick = { onAddVaccineButtonClicked(pet.id) }) {
                     Icon(
                         imageVector = Icons.Filled.Add,
                         contentDescription = stringResource(R.string.content_add),
@@ -227,6 +230,18 @@ fun EmptyMessage() {
 @Composable
 fun VaccinesScreenPreview() {
     MorinhaTheme {
-        VaccinesScreen(Pet())
+        val uiState  = VaccinesUiState.Success(listOf())
+
+        VaccinesContent(
+            pet = Pet(
+                name = "Amora",
+                breed = "Yorkshire Terrier",
+                bornDate = "07/06/2021"
+            ),
+            uiState = uiState,
+            onEditPetButtonClicked = {},
+            onAddVaccineButtonClicked = {},
+            onVaccineItemClicked = {}
+        )
     }
 }

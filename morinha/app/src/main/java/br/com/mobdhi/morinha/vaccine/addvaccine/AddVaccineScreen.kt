@@ -37,12 +37,14 @@ import br.com.mobdhi.morinha.ui.components.LoadingCircularProgress
 import br.com.mobdhi.morinha.ui.components.RadioButtonOption
 import br.com.mobdhi.morinha.ui.theme.MorinhaTheme
 import br.com.mobdhi.morinha.utils.CurrencyAmountInputVisualTransformation
+import br.com.mobdhi.morinha.utils.convertDateToMillis
 import br.com.mobdhi.morinha.utils.convertMillisToDate
 
 
 @Composable
 fun AddVaccineScreen(
     //viewModel: AddVaccineViewModel = getViewModel(),
+    petId: String,
     navigateBack: () -> Unit
 ) {
     //val uiState by viewModel.uiState.collectAsState()
@@ -154,27 +156,40 @@ fun AddVaccineForm(
 
 
         DefaultOutlinedButton(
+            enabled = true,
+            hasIcon = true,
             text = vaccine.applicationDate.ifBlank {
                 stringResource(R.string.vaccine_application_date)
             },
-            enabled = true,
-            hasIcon = true,
-            onClick = { showDatePicker = true }
+            onClick = {
+                showDatePicker = true
+                datePickerState.selectedDateMillis = convertDateToMillis(
+                    vaccine.applicationDate
+                )
+            }
         )
 
         DefaultOutlinedButton(
+            enabled = true,
+            hasIcon = true,
             text = vaccine.nextApplicationDate.ifBlank {
                 stringResource(R.string.vaccine_next_application_date)
             },
-            enabled = true,
-            hasIcon = true,
-            onClick = { showDatePicker = true }
+            onClick = {
+                showDatePicker = true
+                datePickerState.selectedDateMillis = convertDateToMillis(
+                    vaccine.nextApplicationDate
+                )
+            }
         )
 
         if (showDatePicker) {
             DatePickerModal(
                 datePickerState = datePickerState,
-                onDismiss = { showDatePicker = false },
+                onDismiss = {
+                    datePickerState.selectedDateMillis = null
+                    showDatePicker = false
+                },
                 onDateSelected = {
                     updateUiState(
                         vaccine.copy(applicationDate = it?.let { convertMillisToDate(it) } ?: "")
@@ -190,7 +205,6 @@ fun AddVaccineForm(
                 updateUiState(vaccine.copy(observation = it))
             }
         )
-
     }
 
     Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_divisor)))
@@ -209,6 +223,16 @@ fun AddVaccineForm(
 @Composable
 fun AddVaccineScreenPreview() {
     MorinhaTheme {
-        AddVaccineScreen(navigateBack = {})
+        val uiState = AddVaccineUiState.Initial(
+            vaccine = remember { mutableStateOf(Vaccine()) },
+            isEntryValid = remember { mutableStateOf(false) }
+        )
+
+        AddPetContent(
+            uiState = uiState,
+            updateUiState = {},
+            onAddVaccineButtonClicked = {},
+            onAddVaccineWithSuccess = {}
+        )
     }
 }

@@ -16,3 +16,6 @@ sealed class LeafScreens(val route: String) {
 
 @Serializable
 data class VaccinesRoute(val pet: Pet)
+
+@Serializable
+data class AddVaccinesRoute(val petId: String)

@@ -18,6 +18,7 @@ import br.com.mobdhi.morinha.domain.model.Genre
 import br.com.mobdhi.morinha.domain.model.Pet
 import br.com.mobdhi.morinha.domain.model.Specie
 import br.com.mobdhi.morinha.pet.addpet.AddPetScreen
+import br.com.mobdhi.morinha.vaccine.addvaccine.AddVaccineScreen
 import br.com.mobdhi.morinha.vaccine.vaccines.VaccinesScreen
 import org.koin.java.KoinJavaComponent.get
 import kotlin.reflect.typeOf
@@ -53,6 +54,20 @@ private fun NavGraphBuilder.addAuthRoute(
     }
 }
 
+private fun NavGraphBuilder.addHomeRoute(
+    navController: NavController
+) {
+    navigation(
+        route = RootScreen.HomeRoot.route,
+        startDestination = LeafScreens.Home.route
+    ) {
+        showHome(navController)
+        showAddPet(navController)
+        showVaccines(navController)
+        showAddVaccine(navController)
+    }
+}
+
 private fun NavGraphBuilder.showLogin(
     navController: NavController
 ) {
@@ -70,9 +85,10 @@ private fun NavGraphBuilder.showLogin(
                 }
             },
             navigateToForgotPasswordScreen = {
-                Toast.makeText(context, "Funcionalidade ainda não implementada", Toast.LENGTH_LONG)
-                    .show()
-
+                Toast.makeText(
+                    context,
+                    "Funcionalidade ainda não implementada", Toast.LENGTH_LONG
+                ).show()
             },
             navigateToRegisterScreen = { navController.navigate(LeafScreens.Register.route) },
         )
@@ -97,19 +113,6 @@ private fun NavGraphBuilder.showRegister(
     }
 }
 
-private fun NavGraphBuilder.addHomeRoute(
-    navController: NavController
-) {
-    navigation(
-        route = RootScreen.HomeRoot.route,
-        startDestination = LeafScreens.Home.route
-    ) {
-        showHome(navController)
-        showAddPet(navController)
-        showVaccines(navController)
-    }
-}
-
 private fun NavGraphBuilder.showHome(
     navController: NavController
 ) {
@@ -118,9 +121,7 @@ private fun NavGraphBuilder.showHome(
     ) {
         HomeScreen(
             navigateToAddPetScreen = { navController.navigate(LeafScreens.AddPet.route) },
-            navigateToPetVaccinesScreen = {
-                navController.navigate(VaccinesRoute(it))
-            }
+            navigateToPetVaccinesScreen = { navController.navigate(VaccinesRoute(it)) }
         )
     }
 }
@@ -147,8 +148,30 @@ private fun NavGraphBuilder.showVaccines(
             typeOf<Specie>() to serializedType<Specie>()
         )
     ) { backStackEntry ->
+
         val pet = backStackEntry.toRoute<VaccinesRoute>()
-        VaccinesScreen(pet.pet)
+
+        VaccinesScreen(
+            pet = pet.pet,
+            navigateToEditPetScreen = {},
+            navigateToVaccineEditScreen = {},
+            navigateToAddVaccineScreen = { navController.navigate(AddVaccinesRoute(it)) }
+        )
     }
 }
+
+private fun NavGraphBuilder.showAddVaccine(
+    navController: NavController
+) {
+    composable<AddVaccinesRoute> { backStackEntry ->
+
+        val vaccine = backStackEntry.toRoute<AddVaccinesRoute>()
+
+        AddVaccineScreen(
+            petId = vaccine.petId,
+            navigateBack = { navController.navigateUp() }
+        )
+    }
+}
+
 
