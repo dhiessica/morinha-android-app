@@ -1,4 +1,4 @@
-package br.com.mobdhi.morinha.home.addpet
+package br.com.mobdhi.morinha.pet.addpet
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -37,12 +37,13 @@ import br.com.mobdhi.morinha.R
 import br.com.mobdhi.morinha.domain.model.Genre
 import br.com.mobdhi.morinha.domain.model.Pet
 import br.com.mobdhi.morinha.domain.model.Specie
-import br.com.mobdhi.morinha.home.data.getDefaultGenres
-import br.com.mobdhi.morinha.home.data.getDefaultSpecies
+import br.com.mobdhi.morinha.pet.data.getDefaultGenres
+import br.com.mobdhi.morinha.pet.data.getDefaultSpecies
 import br.com.mobdhi.morinha.ui.components.DatePickerModal
 import br.com.mobdhi.morinha.ui.components.DefaultButton
 import br.com.mobdhi.morinha.ui.components.DefaultOutlinedButton
 import br.com.mobdhi.morinha.ui.components.DefaultTextField
+import br.com.mobdhi.morinha.ui.components.ErrorMessage
 import br.com.mobdhi.morinha.ui.components.LoadingCircularProgress
 import br.com.mobdhi.morinha.ui.components.RadioButtonOption
 import br.com.mobdhi.morinha.ui.theme.MorinhaTheme
@@ -84,7 +85,7 @@ fun AddPetContent(
             fontWeight = FontWeight.Bold
         )
         Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium)))
-        when(uiState) {
+        when (uiState) {
             is AddPetUiState.Initial -> {
                 AddPetForm(
                     pet = uiState.pet.value,
@@ -95,12 +96,15 @@ fun AddPetContent(
                     onAddPetButtonClicked = onAddPetButtonClicked
                 )
             }
+
             is AddPetUiState.Success -> {
                 onAddPetWithSuccess.invoke()
             }
+
             is AddPetUiState.Error -> {
-                AddPetError()
+                ErrorMessage()
             }
+
             is AddPetUiState.Loading -> {
                 LoadingCircularProgress()
             }
@@ -140,7 +144,7 @@ fun AddPetForm(
         )
         DefaultTextField(
             label = stringResource(R.string.pet_weight),
-            value = pet.weight.ifBlank { "" }.replace(".",""),
+            value = pet.weight.ifBlank { "" }.replace(".", ""),
             onValueChange = {
                 if (it.isDigitsOnly() && it.length <= 4) {
                     updateUiState(
@@ -161,7 +165,7 @@ fun AddPetForm(
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.NumberPassword
             ),
-            suffix = { Text ("kg") }
+            suffix = { Text("kg") }
 
         )
         DefaultTextField(
@@ -237,38 +241,12 @@ fun AddPetForm(
     }
 }
 
-@Composable
-fun AddPetError() {
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium)),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Icon(
-            imageVector = Icons.Filled.ErrorOutline,
-            contentDescription = stringResource(R.string.content_arrow_right_icon),
-            modifier = Modifier.size(dimensionResource(R.dimen.padding_large))
-        )
-        Text(
-            text = stringResource(R.string.add_pet_error),
-            style = MaterialTheme.typography.titleLarge,
-            textAlign = TextAlign.Center,
-            fontWeight = FontWeight.Bold
-        )
-        Text(
-            text = stringResource(R.string.add_pet_error_sub),
-            style = MaterialTheme.typography.bodyLarge,
-        )
-    }
-}
-
 fun addDotBeforeLastNumber(input: String): String {
     val regex = Regex("(\\d)(?=\\D*$)")
     return regex.replace(input) { matchResult ->
         ".${matchResult.value}"
     }
 }
-
 
 
 @Preview(showSystemUi = true)

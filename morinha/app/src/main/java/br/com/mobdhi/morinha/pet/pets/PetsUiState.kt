@@ -1,4 +1,4 @@
-package br.com.mobdhi.morinha.home.pets
+package br.com.mobdhi.morinha.pet.pets
 
 import br.com.mobdhi.morinha.domain.model.Pet
 

@@ -1,4 +1,4 @@
-package br.com.mobdhi.morinha.home.pets
+package br.com.mobdhi.morinha.pet.pets
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -31,6 +31,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.mobdhi.morinha.R
 import br.com.mobdhi.morinha.domain.model.Pet
+import br.com.mobdhi.morinha.ui.components.ErrorMessage
+import br.com.mobdhi.morinha.ui.components.LoadingCircularProgress
 import br.com.mobdhi.morinha.ui.components.PetCard
 import br.com.mobdhi.morinha.ui.theme.MorinhaTheme
 import org.koin.androidx.compose.getViewModel
@@ -86,21 +88,6 @@ fun HomeContent(
             }
         }
         when(uiState) {
-            is PetsUiState.Loading -> {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(dimensionResource(R.dimen.padding_large)),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.width(64.dp),
-                        color = MaterialTheme.colorScheme.secondary,
-                        trackColor = MaterialTheme.colorScheme.surfaceVariant,
-                    )
-                }
-            }
             is PetsUiState.Success -> {
                 if (!uiState.petList.isNullOrEmpty()) {
                     LazyColumn(
@@ -119,8 +106,10 @@ fun HomeContent(
                 }
             }
             is PetsUiState.Error -> {
-                Text(text = " errooo, ${uiState.message}")
-                println("erro ${uiState.message}")
+                ErrorMessage()
+            }
+            is PetsUiState.Loading -> {
+                LoadingCircularProgress()
             }
         }
     }

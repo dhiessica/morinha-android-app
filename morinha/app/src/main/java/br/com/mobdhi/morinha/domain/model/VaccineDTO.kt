@@ -1,7 +1,6 @@
 package br.com.mobdhi.morinha.domain.model
 
-data class Vaccine(
-    val id: String = "",
+data class VaccineDTO(
     val applicationDate: String = "",
     val batchNumber: String = "",
     val manufacturer: String = "",
@@ -10,15 +9,4 @@ data class Vaccine(
     val observation: String = "",
     val petId: String = "",
     val veterinarian: String = ""
-)
-
-fun Vaccine.toVaccineDTO(): VaccineDTO = VaccineDTO(
-    applicationDate,
-    batchNumber,
-    manufacturer,
-    name,
-    nextApplicationDate,
-    observation,
-    petId,
-    veterinarian
 )

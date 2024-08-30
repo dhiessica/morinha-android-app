@@ -27,8 +27,8 @@
     <string name="pet_color">Cor</string>
     <string name="ok">Ok</string>
     <string name="cancel">Cancelar</string>
-    <string name="add_pet_error">Ops! Não foi possível adicionar o pet.</string>
-    <string name="add_pet_error_sub">Tente novamente mais tarde.</string>
+    <string name="error_title">Ops! Houve um problema ao recuperar as informações.</string>
+    <string name="error_sub">Tente novamente mais tarde.</string>
     <string name="vaccines_title">Vacinas</string>
     <string name="x_years_old">%s anos de idade</string>
     <string name="applied_in">aplicado em</string>
@@ -36,6 +36,7 @@
 
 
     <string name="content_arrow_right_icon">Ícone de seta para a direita para prosseguir</string>
+    <string name="content_error_icon">Ícone de informativo sobre erro</string>
     <string name="content_add">Ícone de mais para adicionar</string>
     <string name="content_edit">Ícone de lapis para modificar</string>
 </resources>

@@ -1,4 +1,4 @@
-package br.com.mobdhi.morinha.home.data
+package br.com.mobdhi.morinha.pet.data
 
 import br.com.mobdhi.morinha.domain.model.Genre
 import br.com.mobdhi.morinha.domain.model.Specie

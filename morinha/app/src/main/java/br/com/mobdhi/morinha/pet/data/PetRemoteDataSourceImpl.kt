@@ -1,4 +1,4 @@
-package br.com.mobdhi.morinha.home.data
+package br.com.mobdhi.morinha.pet.data
 
 import br.com.mobdhi.morinha.domain.datasource.PetDataSource
 import br.com.mobdhi.morinha.domain.RemoteDataBasePaths.PETS

@@ -1,4 +1,4 @@
-package br.com.mobdhi.morinha.home.addpet
+package br.com.mobdhi.morinha.pet.addpet
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import br.com.mobdhi.morinha.domain.model.Pet
 import br.com.mobdhi.morinha.domain.model.Response
 import br.com.mobdhi.morinha.domain.repository.PetRepository
-import br.com.mobdhi.morinha.home.data.PetRepositoryImpl
+import br.com.mobdhi.morinha.pet.data.PetRepositoryImpl
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -16,10 +16,12 @@ import kotlinx.coroutines.launch
 class AddPetViewModel(
     private val petRepository: PetRepository
 ): ViewModel() {
-    var uiState = MutableStateFlow<AddPetUiState>(AddPetUiState.Initial(
-        pet = mutableStateOf(Pet()),
-        isEntryValid = mutableStateOf(false)
-    ))
+    var uiState = MutableStateFlow<AddPetUiState>(
+        AddPetUiState.Initial(
+            pet = mutableStateOf(Pet()),
+            isEntryValid = mutableStateOf(false)
+        )
+    )
         private set
 
     fun addPet(pet: Pet = uiState.value.pet.value) = viewModelScope.launch {

@@ -1,4 +1,4 @@
-package br.com.mobdhi.morinha.home.addpet
+package br.com.mobdhi.morinha.pet.addpet
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf

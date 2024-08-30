@@ -11,14 +11,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.toRoute
 import br.com.mobdhi.morinha.domain.repository.AuthRepository
-import br.com.mobdhi.morinha.home.pets.HomeScreen
+import br.com.mobdhi.morinha.pet.pets.HomeScreen
 import br.com.mobdhi.morinha.auth.login.LoginScreen
 import br.com.mobdhi.morinha.auth.register.RegisterScreen
 import br.com.mobdhi.morinha.domain.model.Genre
 import br.com.mobdhi.morinha.domain.model.Pet
 import br.com.mobdhi.morinha.domain.model.Specie
-import br.com.mobdhi.morinha.home.addpet.AddPetScreen
-import br.com.mobdhi.morinha.home.vaccines.VaccinesScreen
+import br.com.mobdhi.morinha.pet.addpet.AddPetScreen
+import br.com.mobdhi.morinha.vaccines.VaccinesScreen
 import org.koin.java.KoinJavaComponent.get
 import kotlin.reflect.typeOf
 

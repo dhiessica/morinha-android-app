@@ -1,4 +1,4 @@
-package br.com.mobdhi.morinha.home.pets
+package br.com.mobdhi.morinha.pet.pets
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,14 +10,14 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class PetsViewModel(
-    private val homeRepository: PetRepository
+    private val petRepository: PetRepository
 ) : ViewModel() {
 
     var uiState = MutableStateFlow<PetsUiState>(PetsUiState.Loading())
         private set
 
     fun getPets() = viewModelScope.launch {
-        homeRepository.getPets().collectLatest { result ->
+        petRepository.getPets().collectLatest { result ->
             when (result) {
                 is Response.Loading -> {
                     uiState.update { PetsUiState.Loading() }
