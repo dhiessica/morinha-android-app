@@ -1,11 +1,10 @@
-package br.com.mobdhi.morinha.vaccines
+package br.com.mobdhi.morinha.vaccine.vaccines
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.mobdhi.morinha.domain.model.Pet
 import br.com.mobdhi.morinha.domain.model.Response
 import br.com.mobdhi.morinha.domain.repository.VaccinesRepository
-import br.com.mobdhi.morinha.pet.pets.PetsUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update

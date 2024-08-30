@@ -13,7 +13,7 @@
     <string name="error_password_no_match">As senhas estão diferentes</string>
     <string name="error_password_length_min">A senha precisa ter no mmínimo 6 caracteres</string>
     <string name="pets_title">Meus pets</string>
-    <string name="add_pet_title">Adicionar novo pet</string>
+    <string name="add_pet_title">Adicionar pet</string>
     <string name="pet_name">Nome do pet</string>
     <string name="pet_specie">Espécie</string>
     <string name="pet_dog">Cão</string>
@@ -34,6 +34,14 @@
     <string name="x_years_old">%s anos de idade</string>
     <string name="applied_in">aplicado em</string>
     <string name="vaccines">Vacinas</string>
+    <string name="add_vaccine_title">Adicionar vacina</string>
+    <string name="vaccine_name">Nome da vacina</string>
+    <string name="vaccine_manufacturer">Nome do fabricante</string>
+    <string name="vaccine_batch_number">Lote de fabricação</string>
+    <string name="vaccine_veterinarian">Veterinário responsável</string>
+    <string name="vaccine_observation">Observações (Opcional)</string>
+    <string name="vaccine_application_date">Data de aplicação</string>
+    <string name="vaccine_next_application_date">Data da próxima aplicação</string>
 
 
     <string name="content_arrow_right_icon">Ícone de seta para a direita para prosseguir</string>

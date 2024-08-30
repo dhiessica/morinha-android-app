@@ -1,4 +1,4 @@
-package br.com.mobdhi.morinha.vaccines.data
+package br.com.mobdhi.morinha.vaccine.data
 
 import br.com.mobdhi.morinha.domain.model.Pet
 import br.com.mobdhi.morinha.domain.model.Response

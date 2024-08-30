@@ -1,4 +1,4 @@
-package br.com.mobdhi.morinha.vaccines
+package br.com.mobdhi.morinha.vaccine.vaccines
 
 import br.com.mobdhi.morinha.domain.model.Vaccine
 

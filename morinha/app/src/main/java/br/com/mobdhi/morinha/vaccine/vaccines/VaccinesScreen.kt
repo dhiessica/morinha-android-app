@@ -1,13 +1,11 @@
-package br.com.mobdhi.morinha.vaccines
+package br.com.mobdhi.morinha.vaccine.vaccines
 
-import android.content.res.Resources.Theme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -18,14 +16,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.ErrorOutline
 import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.outlined.Edit
-import androidx.compose.material.icons.outlined.EditAttributes
-import androidx.compose.material.icons.outlined.EditNote
-import androidx.compose.material.icons.outlined.ModeEdit
-import androidx.compose.material.icons.rounded.Edit
-import androidx.compose.material.icons.sharp.Edit
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -34,12 +25,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -52,11 +40,9 @@ import br.com.mobdhi.morinha.domain.model.Pet
 import br.com.mobdhi.morinha.domain.model.Vaccine
 import br.com.mobdhi.morinha.ui.components.ErrorMessage
 import br.com.mobdhi.morinha.ui.components.LoadingCircularProgress
-import br.com.mobdhi.morinha.ui.components.PetCard
 import br.com.mobdhi.morinha.ui.components.TimelineNodePosition
 import br.com.mobdhi.morinha.ui.components.VaccineItem
 import br.com.mobdhi.morinha.ui.theme.MorinhaTheme
-import br.com.mobdhi.morinha.ui.theme.PurpleGrey80
 import br.com.mobdhi.morinha.utils.calculateAgeFromDate
 import org.koin.androidx.compose.getViewModel
 

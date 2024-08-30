@@ -18,7 +18,7 @@ import br.com.mobdhi.morinha.domain.model.Genre
 import br.com.mobdhi.morinha.domain.model.Pet
 import br.com.mobdhi.morinha.domain.model.Specie
 import br.com.mobdhi.morinha.pet.addpet.AddPetScreen
-import br.com.mobdhi.morinha.vaccines.VaccinesScreen
+import br.com.mobdhi.morinha.vaccine.vaccines.VaccinesScreen
 import org.koin.java.KoinJavaComponent.get
 import kotlin.reflect.typeOf
 

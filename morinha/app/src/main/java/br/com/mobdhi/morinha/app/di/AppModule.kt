@@ -10,9 +10,9 @@ import br.com.mobdhi.morinha.pet.addpet.AddPetViewModel
 import br.com.mobdhi.morinha.pet.data.PetRepositoryImpl
 import br.com.mobdhi.morinha.pet.pets.PetsViewModel
 import br.com.mobdhi.morinha.pet.data.PetRemoteDataSourceImpl
-import br.com.mobdhi.morinha.vaccines.VaccinesViewModel
-import br.com.mobdhi.morinha.vaccines.data.VaccinesRemoteDataSourceImpl
-import br.com.mobdhi.morinha.vaccines.data.VaccinesRepositoryImpl
+import br.com.mobdhi.morinha.vaccine.vaccines.VaccinesViewModel
+import br.com.mobdhi.morinha.vaccine.data.VaccinesRemoteDataSourceImpl
+import br.com.mobdhi.morinha.vaccine.data.VaccinesRepositoryImpl
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import org.koin.androidx.viewmodel.dsl.viewModel

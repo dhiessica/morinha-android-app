@@ -1,4 +1,4 @@
-package br.com.mobdhi.morinha.vaccines.data
+package br.com.mobdhi.morinha.vaccine.data
 
 import br.com.mobdhi.morinha.domain.RemoteDataBasePaths.VACCINES
 import br.com.mobdhi.morinha.domain.datasource.VaccinesDataSource

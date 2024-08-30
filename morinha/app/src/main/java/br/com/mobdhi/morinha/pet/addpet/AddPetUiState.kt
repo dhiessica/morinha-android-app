@@ -10,7 +10,7 @@ sealed class AddPetUiState(
     val message: String? = null
 ) {
     class Initial(pet: MutableState<Pet>, isEntryValid: MutableState<Boolean>) : AddPetUiState(pet, isEntryValid)
-    class Success() : AddPetUiState()
+    class Success : AddPetUiState()
     class Error(message: String?, pet: Pet? = null) : AddPetUiState()
     class Loading : AddPetUiState()
 }
