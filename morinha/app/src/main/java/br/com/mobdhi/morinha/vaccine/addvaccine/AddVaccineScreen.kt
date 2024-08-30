@@ -14,6 +14,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -39,25 +40,21 @@ import br.com.mobdhi.morinha.ui.theme.MorinhaTheme
 import br.com.mobdhi.morinha.utils.CurrencyAmountInputVisualTransformation
 import br.com.mobdhi.morinha.utils.convertDateToMillis
 import br.com.mobdhi.morinha.utils.convertMillisToDate
+import org.koin.androidx.compose.getViewModel
 
 
 @Composable
 fun AddVaccineScreen(
-    //viewModel: AddVaccineViewModel = getViewModel(),
+    viewModel: AddVaccineViewModel = getViewModel(),
     petId: String,
     navigateBack: () -> Unit
 ) {
-    //val uiState by viewModel.uiState.collectAsState()
-    val uiState = AddVaccineUiState.Initial(
-        vaccine = remember { mutableStateOf(Vaccine()) },
-        isEntryValid = remember { mutableStateOf(false) }
-    )
-
+    val uiState by viewModel.uiState.collectAsState()
 
     AddPetContent(
         uiState = uiState,
-        updateUiState = {} /* viewModel::updateUiState */,
-        onAddVaccineButtonClicked = {} /* viewModel::addVaccine */,
+        updateUiState = { viewModel.updateUiState(it.copy(petId = petId)) },
+        onAddVaccineButtonClicked = viewModel::addVaccine,
         onAddVaccineWithSuccess = navigateBack
     )
 }
@@ -116,6 +113,7 @@ fun AddVaccineForm(
     onAddVaccineButtonClicked: () -> Unit,
     isEntryValid: Boolean
 ) {
+    var isNextApplicationDateInput by remember { mutableStateOf(false) }
     var showDatePicker by remember { mutableStateOf(false) }
     val datePickerState = rememberDatePickerState(initialDisplayMode = DisplayMode.Input)
 
@@ -177,6 +175,7 @@ fun AddVaccineForm(
             },
             onClick = {
                 showDatePicker = true
+                isNextApplicationDateInput = true
                 datePickerState.selectedDateMillis = convertDateToMillis(
                     vaccine.nextApplicationDate
                 )
@@ -191,12 +190,19 @@ fun AddVaccineForm(
                     showDatePicker = false
                 },
                 onDateSelected = {
-                    updateUiState(
-                        vaccine.copy(applicationDate = it?.let { convertMillisToDate(it) } ?: "")
-                    )
+                    if (isNextApplicationDateInput) {
+                        updateUiState(
+                            vaccine.copy(nextApplicationDate = it?.let { convertMillisToDate(it) } ?: "")
+                        )
+                    } else {
+                        updateUiState(
+                            vaccine.copy(applicationDate = it?.let { convertMillisToDate(it) } ?: "")
+                        )
+                    }
                 }
             )
         }
+
 
         DefaultTextField(
             label = stringResource(R.string.vaccine_observation),

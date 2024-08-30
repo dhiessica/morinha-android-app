@@ -169,7 +169,7 @@ private fun NavGraphBuilder.showAddVaccine(
 
         AddVaccineScreen(
             petId = vaccine.petId,
-            navigateBack = { navController.navigateUp() }
+            navigateBack = { navController.popBackStack<VaccinesRoute>(inclusive = false) }
         )
     }
 }
