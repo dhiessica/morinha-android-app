@@ -7,6 +7,7 @@ import br.com.mobdhi.morinha.domain.model.Response
 import br.com.mobdhi.morinha.domain.model.Vaccine
 import br.com.mobdhi.morinha.domain.model.toVaccineDTO
 import br.com.mobdhi.morinha.domain.repository.AuthRepository
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -21,6 +22,7 @@ import kotlinx.coroutines.tasks.await
  */
 class VaccinesRemoteDataSourceImpl(
     private val dataBase: FirebaseFirestore,
+    private val crashlytics: FirebaseCrashlytics,
     private val auth: AuthRepository
 ): VaccinesDataSource {
     override fun getVaccines(pet: Pet): Flow<Response<List<Vaccine>>> {
@@ -40,11 +42,9 @@ class VaccinesRemoteDataSourceImpl(
 
             } else throw IllegalAccessError()
         }.catch {
-            emit(
-                Response.Error(
-                    message = "Error ${it.message} \n Cause ${it.cause} \n Stack ${it.stackTrace}"
-                )
-            )
+            val message = "Error ${it.message} \n Cause ${it.cause} \n Stack ${it.stackTrace}"
+            emit(Response.Error(message = message))
+            crashlytics.recordException(IllegalArgumentException(message))
         }
     }
 
@@ -56,11 +56,9 @@ class VaccinesRemoteDataSourceImpl(
 
             emit(Response.Success(data = result.id))
         }.catch {
-            emit(
-                Response.Error(
-                    message = "Error ${it.message} \n Cause ${it.cause} \n Stack ${it.stackTrace}"
-                )
-            )
+            val message = "Error ${it.message} \n Cause ${it.cause} \n Stack ${it.stackTrace}"
+            emit(Response.Error(message = message))
+            crashlytics.recordException(IllegalArgumentException(message))
         }
     }
 
@@ -72,11 +70,9 @@ class VaccinesRemoteDataSourceImpl(
 
             emit(Response.Success(data = "$result"))
         }.catch {
-            emit(
-                Response.Error(
-                    message = "Error ${it.message} \n Cause ${it.cause} \n Stack ${it.stackTrace}"
-                )
-            )
+            val message = "Error ${it.message} \n Cause ${it.cause} \n Stack ${it.stackTrace}"
+            emit(Response.Error(message = message))
+            crashlytics.recordException(IllegalArgumentException(message))
         }
     }
 
@@ -88,11 +84,9 @@ class VaccinesRemoteDataSourceImpl(
 
             emit(Response.Success(data = "$result"))
         }.catch {
-            emit(
-                Response.Error(
-                    message = "Error ${it.message} \n Cause ${it.cause} \n Stack ${it.stackTrace}"
-                )
-            )
+            val message = "Error ${it.message} \n Cause ${it.cause} \n Stack ${it.stackTrace}"
+            emit(Response.Error(message = message))
+            crashlytics.recordException(IllegalArgumentException(message))
         }
     }
 }

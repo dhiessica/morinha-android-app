@@ -10,10 +10,11 @@ activityCompose = "1.9.1"
 composeBom = "2023.08.00"
 navigation = "2.8.0-rc01"
 googleServices = "4.4.2"
-firebaseBom = "33.1.2"
+firebaseBom = "33.2.0"
 koin = "3.4.0"
 material3 = "1.2.1"
 serialization = "1.7.2"
+crashlytics = "2.9.9"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -49,3 +50,5 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "crashlytics" }
+

@@ -15,6 +15,7 @@ import br.com.mobdhi.morinha.vaccine.vaccines.VaccinesViewModel
 import br.com.mobdhi.morinha.vaccine.data.VaccinesRemoteDataSourceImpl
 import br.com.mobdhi.morinha.vaccine.data.VaccinesRepositoryImpl
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.FirebaseFirestore
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -22,11 +23,12 @@ import org.koin.dsl.module
 fun morinhaAppKoinModule() = module {
     single<FirebaseAuth> { FirebaseAuth.getInstance() }
     single<FirebaseFirestore> { FirebaseFirestore.getInstance() }
+    single<FirebaseCrashlytics> { FirebaseCrashlytics.getInstance() }
 
-    single { PetRemoteDataSourceImpl(get(), get()) }
-    single { VaccinesRemoteDataSourceImpl(get(), get()) }
+    single { PetRemoteDataSourceImpl(get(), get(), get()) }
+    single { VaccinesRemoteDataSourceImpl(get(), get(), get()) }
 
-    single<AuthRepository> { AuthRepositoryImpl(get()) }
+    single<AuthRepository> { AuthRepositoryImpl(get(), get()) }
     single<PetRepository> { PetRepositoryImpl(get()) }
     single<VaccinesRepository> { VaccinesRepositoryImpl(get()) }
 

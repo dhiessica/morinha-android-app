@@ -5,6 +5,7 @@ import br.com.mobdhi.morinha.domain.model.User
 import br.com.mobdhi.morinha.domain.model.Response
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -13,6 +14,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 
 class AuthRepositoryImpl(
+    private val crashlytics: FirebaseCrashlytics,
     private val auth: FirebaseAuth
 ) : AuthRepository {
 
@@ -38,11 +40,9 @@ class AuthRepositoryImpl(
             val result = auth.signInWithEmailAndPassword(email, password).await()
             emit(Response.Success(data = result))
         }.catch {
-            emit(
-                Response.Error(
-                    message = "Error ${it.message} \n Cause ${it.cause} \n Stack ${it.stackTrace}"
-                )
-            )
+            val message = "Error ${it.message} \n Cause ${it.cause} \n Stack ${it.stackTrace}"
+            emit(Response.Error(message = message))
+            crashlytics.recordException(IllegalArgumentException(message))
         }
     }
 
@@ -52,11 +52,9 @@ class AuthRepositoryImpl(
             val result = auth.createUserWithEmailAndPassword(email, password).await()
             emit(Response.Success(result))
         }.catch {
-            emit(
-                Response.Error(
-                    message = "Error ${it.message} \n Cause ${it.cause} \n Stack ${it.stackTrace}"
-                )
-            )
+            val message = "Error ${it.message} \n Cause ${it.cause} \n Stack ${it.stackTrace}"
+            emit(Response.Error(message = message))
+            crashlytics.recordException(IllegalArgumentException(message))
         }
     }
 }
