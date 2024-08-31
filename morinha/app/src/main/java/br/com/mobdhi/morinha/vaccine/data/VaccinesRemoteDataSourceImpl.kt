@@ -13,6 +13,12 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 
+/**
+ * Funções para manipular dados das vacinas dos pets no Firestore
+ *
+ * @param dataBase é um objeto [FirebaseFirestore] que é responsável por manipular os dados remotos.
+ * @param auth é um objeto [AuthRepository] que é possue as funções de autenticação.
+ */
 class VaccinesRemoteDataSourceImpl(
     private val dataBase: FirebaseFirestore,
     private val auth: AuthRepository

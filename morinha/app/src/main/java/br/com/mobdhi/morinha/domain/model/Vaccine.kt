@@ -15,6 +15,10 @@ data class Vaccine(
     val veterinarian: String = ""
 )
 
+/**
+ * Função para converter o objeto [Vaccine] para o [VaccineDTO] que não possui o campo ID para não
+ * duplicar o id como parte do documento do firestore
+ */
 fun Vaccine.toVaccineDTO(): VaccineDTO = VaccineDTO(
     applicationDate,
     batchNumber,

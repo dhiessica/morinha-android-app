@@ -15,6 +15,10 @@ data class Pet(
     val tutorId: String = ""
 )
 
+/**
+ * Função para converter o objeto [PET] para o [PetDTO] que não possui o campo ID para não
+ * duplicar o id como parte do documento do firestore
+ */
 fun Pet.toPetDTO(): PetDTO = PetDTO(
     name,
     specie,
