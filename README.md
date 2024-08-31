@@ -5,9 +5,7 @@ App para registro de vacinas de cães e gatos. Para utilizar o app o usuário de
 ### Tutor
 - 🟡Registrar conta
 - 🟡Entrar na conta
-- Editar informações da conta
-- Apagar conta
-- Recuperar senha da conta
+- 🟡Sair da conta
 
 ### Pet
 - 🟡Listar pets
