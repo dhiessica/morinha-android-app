@@ -38,4 +38,9 @@ interface AuthRepository {
      * @param password é um [String] com a senha do usuário que será registrado.
      */
     fun register(email: String, password: String): Flow<Response<AuthResult>>
+
+    /**
+     * Função para deslogar o usuário atual
+     */
+    fun logout(): Flow<Response<String>>
 }

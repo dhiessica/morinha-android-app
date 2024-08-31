@@ -35,8 +35,8 @@ class AddEditVaccineViewModel(
     }
 
     private fun addVaccine(vaccine: Vaccine = uiState.value.vaccine.value) = viewModelScope.launch {
-        if (validateInput(vaccine.copy(petId = petId))) {
-            vaccinesRepository.addVaccine(vaccine).collectLatest { result ->
+        if (validateInput()) {
+            vaccinesRepository.addVaccine(vaccine.copy(petId = petId)).collectLatest { result ->
                 when (result) {
                     is Response.Loading -> {
                         uiState.update { AddEditVaccineUiState.Loading() }

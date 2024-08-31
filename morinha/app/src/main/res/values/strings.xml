@@ -5,6 +5,7 @@
     <string name="confirm_password">Confirmar senha</string>
     <string name="forgot_password">Esqueci minha senha</string>
     <string name="log_in">Entrar</string>
+    <string name="log_out">Sair do app</string>
     <string name="log_in_title">Entrada</string>
     <string name="register">Registrar</string>
     <string name="continue_button">Continuar</string>
@@ -14,6 +15,7 @@
     <string name="error_password_length_min">A senha precisa ter no mmínimo 6 caracteres</string>
     <string name="pets_title">Meus pets</string>
     <string name="add_pet_title">Adicionar pet</string>
+    <string name="account_title">Minha conta</string>
     <string name="edit_pet_title">Modificar pet</string>
     <string name="pet_name">Nome do pet</string>
     <string name="pet_specie">Espécie</string>

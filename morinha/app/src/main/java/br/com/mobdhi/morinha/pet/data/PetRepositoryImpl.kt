@@ -12,6 +12,10 @@ class PetRepositoryImpl(
         return remoteDataSourceImpl.getPets() //Todo: adicionar regras pra banco de dados local
     }
 
+    override fun getPet(id: String): Flow<Response<Pet>> {
+        return remoteDataSourceImpl.getPet(id)
+    }
+
     override fun addPet(pet: Pet): Flow<Response<String>> {
         return remoteDataSourceImpl.addPets(pet)
     }

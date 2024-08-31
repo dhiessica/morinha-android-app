@@ -6,10 +6,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -29,10 +31,11 @@ fun DefaultOutlinedButton(
     enabled: Boolean,
     onClick: () -> Unit,
     hasIcon: Boolean = false,
+    isLoading: Boolean = false,
     color: Color = MaterialTheme.colorScheme.primary
 ) {
     Button(
-        onClick = onClick,
+        onClick = { if(!isLoading) onClick() },
         enabled = enabled,
         shape = MaterialTheme.shapes.small,
         border = BorderStroke(1.dp, color),
@@ -42,24 +45,33 @@ fun DefaultOutlinedButton(
         ),
         modifier = Modifier.fillMaxWidth()
     ) {
-        if (hasIcon) {
-            Text(
-                text = text,
-                modifier = Modifier
-                    .padding(dimensionResource(R.dimen.padding_small))
-                    .weight(1F)
+
+        if (isLoading) {
+            CircularProgressIndicator(
+                modifier = Modifier.width(24.dp),
+                color = MaterialTheme.colorScheme.secondary,
+                trackColor = MaterialTheme.colorScheme.surfaceVariant,
             )
-            Icon(
-                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                contentDescription = stringResource(R.string.content_arrow_right_icon),
-                modifier = Modifier.size(dimensionResource(R.dimen.padding_large))
-            )
+        } else {
+            if (hasIcon) {
+                Text(
+                    text = text,
+                    modifier = Modifier
+                        .padding(dimensionResource(R.dimen.padding_small))
+                        .weight(1F)
+                )
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                    contentDescription = stringResource(R.string.content_arrow_right_icon),
+                    modifier = Modifier.size(dimensionResource(R.dimen.padding_large))
+                )
+            }
+            else
+                Text(
+                    text = text,
+                    modifier = Modifier.padding(dimensionResource(R.dimen.padding_small))
+                )
         }
-        else
-            Text(
-                text = text,
-                modifier = Modifier.padding(dimensionResource(R.dimen.padding_small))
-            )
     }
 }
 

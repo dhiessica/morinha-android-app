@@ -4,19 +4,25 @@ import br.com.mobdhi.morinha.domain.model.Pet
 import br.com.mobdhi.morinha.domain.model.Vaccine
 import kotlinx.serialization.Serializable
 
-sealed class RootScreen(val route: String) {
-    object HomeRoot : RootScreen(route = "home_root")
-    object AuthRoot : RootScreen(route = "auth_root")
-}
-sealed class LeafScreens(val route: String) {
-    object Home : LeafScreens(route = "home")
-    object Login : LeafScreens(route = "login")
-    object Register : LeafScreens(route = "register")
-    object AddPet : LeafScreens(route = "add_pet")
-}
+@Serializable
+object LoginRoute
+
+@Serializable
+object RegisterRoute
+
+@Serializable
+object HomeRoot
+@Serializable
+object AuthRoot
+
+@Serializable
+object PetsRoute
 
 @Serializable
 object AddPetRoute
+
+@Serializable
+object AccountRoute
 
 @Serializable
 data class EditPetRoute(val pet: Pet)

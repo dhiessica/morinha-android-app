@@ -10,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.toRoute
+import br.com.mobdhi.morinha.account.AccountScreen
 import br.com.mobdhi.morinha.domain.repository.AuthRepository
 import br.com.mobdhi.morinha.pet.pets.PetsScreen
 import br.com.mobdhi.morinha.auth.login.LoginScreen
@@ -23,36 +24,34 @@ import br.com.mobdhi.morinha.pet.addeditpet.AddPetViewModel
 import br.com.mobdhi.morinha.vaccine.addeditvaccine.AddEditVaccineScreen
 import br.com.mobdhi.morinha.vaccine.addeditvaccine.AddEditVaccineViewModel
 import br.com.mobdhi.morinha.vaccine.vaccines.VaccinesScreen
+import br.com.mobdhi.morinha.vaccine.vaccines.VaccinesViewModel
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 import org.koin.java.KoinJavaComponent.get
+import kotlin.math.log
 import kotlin.reflect.typeOf
 
 @Composable
 fun AppNavHost(
-    navHostController: NavHostController
+    navHostController: NavHostController,
+    restartApp: () -> Unit
 ) {
+    val authRepository: AuthRepository = get(AuthRepository::class.java)
+
     NavHost(
         navController = navHostController,
-        startDestination = getStartDestination()
+        startDestination = if (authRepository.hasUser) HomeRoot else AuthRoot
     ) {
         addAuthRoute(navHostController)
-        addHomeRoute(navHostController)
+        addHomeRoute(navHostController, restartApp)
     }
-}
-
-private fun getStartDestination(): String {
-    val authRepository: AuthRepository = get(AuthRepository::class.java)
-    return if (authRepository.hasUser) RootScreen.HomeRoot.route
-    else RootScreen.AuthRoot.route
 }
 
 private fun NavGraphBuilder.addAuthRoute(
     navController: NavController
 ) {
-    navigation(
-        route = RootScreen.AuthRoot.route,
-        startDestination = LeafScreens.Login.route
+    navigation<AuthRoot>(
+        startDestination = LoginRoute
     ) {
         showLogin(navController)
         showRegister(navController)
@@ -60,12 +59,13 @@ private fun NavGraphBuilder.addAuthRoute(
 }
 
 private fun NavGraphBuilder.addHomeRoute(
-    navController: NavController
+    navController: NavController,
+    restartApp: () -> Unit
 ) {
-    navigation(
-        route = RootScreen.HomeRoot.route,
-        startDestination = LeafScreens.Home.route
+    navigation<HomeRoot>(
+        startDestination = PetsRoute
     ) {
+        showAccount(restartApp)
         showPets(navController)
         showAddPet(navController)
         showEditPet(navController)
@@ -78,15 +78,13 @@ private fun NavGraphBuilder.addHomeRoute(
 private fun NavGraphBuilder.showLogin(
     navController: NavController
 ) {
-    composable(
-        route = LeafScreens.Login.route
-    ) {
+    composable<LoginRoute> {
         val context = LocalContext.current
 
         LoginScreen(
             navigateToHomeScreen = {
-                navController.navigate(RootScreen.HomeRoot.route) {
-                    popUpTo(RootScreen.AuthRoot.route) {
+                navController.navigate(HomeRoot) {
+                    popUpTo(AuthRoot) {
                         inclusive = true
                     }
                 }
@@ -97,7 +95,7 @@ private fun NavGraphBuilder.showLogin(
                     "Funcionalidade ainda não implementada", Toast.LENGTH_LONG
                 ).show()
             },
-            navigateToRegisterScreen = { navController.navigate(LeafScreens.Register.route) },
+            navigateToRegisterScreen = { navController.navigate(RegisterRoute) },
         )
     }
 }
@@ -105,13 +103,11 @@ private fun NavGraphBuilder.showLogin(
 private fun NavGraphBuilder.showRegister(
     navController: NavController
 ) {
-    composable(
-        route = LeafScreens.Register.route
-    ) {
+    composable<RegisterRoute> {
         RegisterScreen(
             navigateToHomeScreen = {
-                navController.navigate(RootScreen.HomeRoot.route) {
-                    popUpTo(RootScreen.AuthRoot.route) {
+                navController.navigate(PetsRoute) {
+                    popUpTo(AuthRoot) {
                         inclusive = true
                     }
                 }
@@ -120,15 +116,24 @@ private fun NavGraphBuilder.showRegister(
     }
 }
 
+private fun NavGraphBuilder.showAccount(
+    restartApp: () -> Unit
+) {
+    composable<AccountRoute> {
+        AccountScreen(
+            logOut = restartApp
+        )
+    }
+}
+
 private fun NavGraphBuilder.showPets(
     navController: NavController
 ) {
-    composable(
-        route = LeafScreens.Home.route
-    ) {
+    composable<PetsRoute> {
         PetsScreen(
             navigateToAddPetScreen = { navController.navigate(AddPetRoute) },
-            navigateToPetVaccinesScreen = { navController.navigate(VaccinesRoute(it)) }
+            navigateToPetVaccinesScreen = { navController.navigate(VaccinesRoute(it)) },
+            onAccountButtonClicked = { navController.navigate(AccountRoute)}
         )
     }
 }
@@ -141,7 +146,7 @@ private fun NavGraphBuilder.showAddPet(
 
         AddPetScreen(
             viewModel = viewModel,
-            navigateBack = { navController.navigateUp() }
+            navigateBack = { navController.popBackStack<PetsRoute>(inclusive = false) }
         )
     }
 }
@@ -160,7 +165,7 @@ private fun NavGraphBuilder.showEditPet(
 
         AddPetScreen(
             viewModel = viewModel,
-            navigateBack = { navController.navigateUp() }
+            navigateBack = { navController.popBackStack<VaccinesRoute>(inclusive = false) }
         )
     }
 }
@@ -178,7 +183,16 @@ private fun NavGraphBuilder.showVaccines(
 
         val routeArguments = backStackEntry.toRoute<VaccinesRoute>()
 
+        val viewModel =
+            getViewModel<VaccinesViewModel>(parameters = {
+                parametersOf(
+                    routeArguments.pet,
+                    Vaccine()
+                )
+            })
+
         VaccinesScreen(
+            viewModel = viewModel,
             pet = routeArguments.pet,
             navigateToEditPetScreen = { navController.navigate(EditPetRoute(it)) },
             navigateToVaccineEditScreen = { navController.navigate(EditVaccineRoute(it)) },

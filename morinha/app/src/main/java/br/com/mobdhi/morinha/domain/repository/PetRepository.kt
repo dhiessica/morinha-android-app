@@ -12,6 +12,11 @@ interface PetRepository {
     fun getPets(): Flow<Response<List<Pet>>>
 
     /**
+     * Função para buscar um pet.
+     */
+    fun getPet(id: String): Flow<Response<Pet>>
+
+    /**
      * Função para adicionar um pet
      *
      * @param pet é um objeto [Pet] com os dados do pet que será adicionado.

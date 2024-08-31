@@ -1,5 +1,6 @@
 package br.com.mobdhi.morinha.ui.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -38,20 +39,21 @@ fun VaccineItem(
     onClick: () -> Unit,
     position: TimelineNodePosition,
 ) {
+    val color = MaterialTheme.colorScheme.surfaceBright
     TimelineNode(
         position = position,
         circleParameters = CircleParametersDefaults.circleParameters(
-            backgroundColor = Color.White
+            backgroundColor = color
         ),
         lineParameters = if(position == TimelineNodePosition.LAST) null
         else LineParametersDefaults.linearGradient(
-            startColor = Color.White,
-            endColor = Color.White
+            startColor = color,
+            endColor = color
         ),
     ) { modifier ->
         MessageBubble(
             modifier = modifier.clickable { onClick() },
-            containerColor = Color.White
+            containerColor = color
         ) {
             Column(
                 modifier = Modifier
@@ -187,8 +189,7 @@ object CircleParametersDefaults {
     ) = CircleParameters(radius, backgroundColor)
 }
 
-
-@Preview(showBackground = true, backgroundColor = 0xffff6347 )
+@Preview(name = "Dark Mode", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
 @Composable
 fun VaccineItemPreview() {
     MorinhaTheme {

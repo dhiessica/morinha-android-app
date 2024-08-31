@@ -1,5 +1,6 @@
 package br.com.mobdhi.morinha.app.di
 
+import br.com.mobdhi.morinha.account.AccountViewModel
 import br.com.mobdhi.morinha.domain.repository.AuthRepository
 import br.com.mobdhi.morinha.auth.AuthRepositoryImpl
 import br.com.mobdhi.morinha.auth.login.LoginViewModel
@@ -32,11 +33,11 @@ fun morinhaAppKoinModule() = module {
     single<PetRepository> { PetRepositoryImpl(get()) }
     single<VaccinesRepository> { VaccinesRepositoryImpl(get()) }
 
+    viewModel { AccountViewModel(get()) }
     viewModel { LoginViewModel(get()) }
     viewModel { RegisterViewModel(get()) }
     viewModel { PetsViewModel(get()) }
     viewModel { AddPetViewModel(get(), get()) }
-    viewModel { VaccinesViewModel(get()) }
     viewModel { VaccinesViewModel(get()) }
     viewModel { AddEditVaccineViewModel(get(), get(), get()) }
 

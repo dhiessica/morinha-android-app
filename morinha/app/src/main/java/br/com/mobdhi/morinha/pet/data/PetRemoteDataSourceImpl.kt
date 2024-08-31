@@ -44,6 +44,22 @@ class PetRemoteDataSourceImpl(
         }
     }
 
+    override fun getPet(id: String): Flow<Response<Pet>> {
+        return flow {
+            emit(Response.Loading())
+
+            val result = dataBase.collection(PETS).document(id).get().await()
+
+            val pet = result.toObject(Pet::class.java)?.copy(id = result.id) ?: Pet()
+
+            emit(Response.Success(data = pet))
+        }.catch {
+            val message = "Error ${it.message} \n Cause ${it.cause} \n Stack ${it.stackTrace}"
+            emit(Response.Error(message = message))
+            crashlytics.recordException(IllegalArgumentException(message))
+        }
+    }
+
     override fun addPets(pet: Pet): Flow<Response<String>> {
         return flow {
             emit(Response.Loading())

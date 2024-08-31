@@ -6,6 +6,6 @@ import androidx.navigation.compose.rememberNavController
 import br.com.mobdhi.morinha.app.navigation.AppNavHost
 
 @Composable
-fun AppMainScreen(navHostController: NavHostController = rememberNavController()) {
-    AppNavHost(navHostController = navHostController)
+fun AppMainScreen(navHostController: NavHostController = rememberNavController(), restartApp: () -> Unit) {
+    AppNavHost(navHostController = navHostController, restartApp = restartApp)
 }
