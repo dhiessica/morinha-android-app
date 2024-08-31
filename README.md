@@ -30,4 +30,5 @@ App para registro de vacinas de cães e gatos. Para utilizar o app o usuário de
 
 ### MBaaS
 - Firebase Analytics
+- Firebase Crashlytics
 - Firebase Auth
