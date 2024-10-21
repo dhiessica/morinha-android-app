@@ -40,6 +40,7 @@ google-firebase-analytics = { group = "com.google.firebase", name = "firebase-an
 google-firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore" }
 google-firebase-auth = { group = "com.google.firebase", name = "firebase-auth" }
 google-firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
+google-firebase-inappmessaging = { group = "com.google.firebase", name = "firebase-inappmessaging-display" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
 koin-androidx-navigation = { group = "io.insert-koin", name = "koin-androidx-navigation", version.ref = "koin" }
 koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
